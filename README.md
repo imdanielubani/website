@@ -107,6 +107,8 @@ Checklist:
 
 After changing `.env` or configuration on a server using `config:cache`, run `php artisan config:cache` again.
 
+Serve the site from the root of its domain (document root = `public/`). If it ever has to run from a subfolder (for example `localhost/website/public/` on XAMPP), skip `php artisan route:cache`: Laravel's cached routes return 405 for the home page in that setup. Every other optimisation is safe.
+
 ## Project structure
 
 ```
@@ -169,12 +171,13 @@ All photographs are registered in `config/images.php`:
 'refinery-river' => ['file' => 'refinery-river', 'w' => 2000, 'h' => 1335, 'alt' => '...'],
 ```
 
-Each key maps to two files in `public/images/photos/`:
+Each key maps to three files in `public/images/photos/`:
 
 - `{file}-lg.webp`, around 1920–2000 px wide
 - `{file}-sm.webp`, 960 px wide
+- `{file}-xs.webp`, 640 px wide (phones)
 
-To replace a photo, export both sizes as WebP with the same file names, update `w`/`h` to the large image's dimensions, and update the `alt` text. Templates reference images by key through the `<x-img key="..." />` component, which handles `srcset`, lazy loading and dimensions to prevent layout shift.
+To replace a photo, export all three sizes as WebP with the same file names, update `w`/`h` to the large image's dimensions, and update the `alt` text. Templates reference images by key through the `<x-img key="..." />` component, which handles `srcset`, lazy loading and dimensions to prevent layout shift.
 
 Current photography is stock imagery used under the Unsplash License and should ideally be replaced with the company's own photographs of its people and locations.
 
