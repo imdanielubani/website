@@ -19,6 +19,7 @@ Built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, **Vite**, **Alpine.js*
 - [Project structure](#project-structure)
 - [Editing content](#editing-content)
 - [Replacing images](#replacing-images)
+- [Languages](#languages)
 - [Forms](#forms)
 - [Motion and accessibility](#motion-and-accessibility)
 - [Security](#security)
@@ -177,7 +178,30 @@ To replace a photo, export both sizes as WebP with the same file names, update `
 
 Current photography is stock imagery used under the Unsplash License and should ideally be replaced with the company's own photographs of its people and locations.
 
-An A4 letterhead is in the same folder as a 300 dpi image (`letterhead-a4.png`) and as an editable Word document (`letterhead-a4.docx`) with the branding in the header and footer and a letter template in the body. Logo files are in `public/images/brand/`: SVG (`logo-on-light.svg`, `logo-on-dark.svg`, `logo-mark.svg`) and high-resolution PNG (`logo-on-light.png` and `logo-on-dark.png` with transparent backgrounds, `logo-on-light-background.png`, `logo-on-dark-background.png`, and 1024px `logo-mark.png` / `logo-mark-accent.png`). The favicon is `public/favicon.svg`. The header and footer logo is the Blade component `resources/views/components/logo.blade.php`.
+An A4 letterhead is in the same folder as a 300 dpi image (`letterhead-a4.png`) and as an editable Word document (`letterhead-a4.docx`) with the branding in the header and footer and a letter template in the body. Logo files are in `public/images/brand/`: SVG (`logo-on-light.svg`, `logo-on-dark.svg`, `logo-mark.svg`) and high-resolution PNG (`logo-on-light.png` and `logo-on-dark.png` with transparent backgrounds, `logo-on-light-background.png`, `logo-on-dark-background.png`, and 1024px `logo-mark.png` / `logo-mark-accent.png`). Browser and device icons are in `public/`: `favicon.svg`, `favicon.ico`, `apple-touch-icon.png` (iPhone/iPad home screen, 180×180), `icon-192.png`, `icon-512.png` and `icon-maskable-512.png` for Android, referenced by `site.webmanifest`. The header and footer logo is the Blade component `resources/views/components/logo.blade.php`.
+
+## Languages
+
+The site is bilingual: **English** (default) and **Albanian**.
+
+| | English | Albanian |
+| --- | --- | --- |
+| URLs | `/about`, `/contact`, … | `/sq/about`, `/sq/contact`, … |
+| Route names | `about` | `sq.about` |
+
+A language switcher (EN / SQ) in the header links to the same page in the other language. Each page declares `hreflang` alternates, the `<html lang>` attribute and the Open Graph locale.
+
+**How it works**
+
+- `config/site.php` lists the languages. `App\Http\Middleware\SetLocale` picks the language from the URL prefix, so error pages are translated too.
+- `routes/web.php` registers every route once per language.
+- In templates, link with `lroute('about')` (not `route()`), check the active page with `route_is('about')`, and wrap text in `__('English text')`. Components (headings, heroes, buttons, call-to-action blocks, form fields) translate their text props automatically.
+- Albanian translations live in `lang/sq.json` (keyed by the English text) and `lang/sq/validation.php` / `pagination.php`. A missing translation falls back to English.
+- Legal pages have full per-language bodies in `resources/views/pages/legal/{en,sq}/`.
+- News articles take an optional `'sq' => [...]` block with translated title, excerpt, content and SEO fields (`resources/content/news.php`).
+- Form notification emails include the language the visitor used.
+
+To add a language, add it to `config/site.php`, create `lang/{code}.json` and `lang/{code}/validation.php`, and add legal page bodies in `resources/views/pages/legal/{code}/`.
 
 ## Forms
 
