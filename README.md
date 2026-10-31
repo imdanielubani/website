@@ -21,6 +21,7 @@ Built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, **Vite**, **Alpine.js*
 - [Replacing images](#replacing-images)
 - [Forms](#forms)
 - [Motion and accessibility](#motion-and-accessibility)
+- [Security](#security)
 - [Search engine visibility](#search-engine-visibility)
 
 ---
@@ -212,6 +213,37 @@ Animations are declared with data attributes in templates and implemented in `re
 - Content is fully visible in the HTML; hidden start states are applied only by JavaScript.
 - There is no scroll-jacking. Page transitions only intercept plain left-clicks on internal links, and browser history works normally.
 - The site includes skip-to-content, visible focus states, a keyboard-accessible mega menu, a focus-trapped mobile menu, labelled form fields with linked error messages, and alt text for every image.
+
+## Security
+
+The site is hardened against common web attacks. Every protection is covered by the test suite (`tests/Feature/SecurityTest.php`, `FormsTest.php`).
+
+| Threat | Protection |
+| --- | --- |
+| Exposure of private files (`.env`, logs, `.git`, sessions) | The web server document root must be `public/`. As a safety net, the root `.htaccess` denies everything outside `public/`, and `public/.htaccess` blocks hidden files, backups, logs and directory listings. |
+| Cross-site scripting (XSS) | All output escaped by Blade; Markdown rendered with raw HTML stripped and unsafe links disabled; strict Content Security Policy with a per-request nonce (`app/Http/Middleware/SecurityHeaders.php`). |
+| Clickjacking | `X-Frame-Options: DENY` and `frame-ancestors 'none'`. |
+| Cross-site request forgery | Laravel CSRF tokens on every form. |
+| Form spam and bots | Server-side validation, hidden honeypot field, encrypted time trap (`app/Rules/HumanSubmissionTime.php`) that rejects instant or replayed submissions, consent checkbox. |
+| Brute force and flooding | Forms limited to 3 per minute and 15 per hour per IP; all pages limited to 120 requests per minute per IP. |
+| Host header poisoning | Only the host in `APP_URL` is accepted outside local development. |
+| Information leakage | Debug mode is forced off in production; `X-Powered-By` removed; custom error pages. |
+| Session theft | HttpOnly, SameSite cookies; encrypted session data; secure-only cookies and HSTS over HTTPS. |
+| MIME sniffing, referrer leaks, browser features | `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` and `Cross-Origin-Resource-Policy`. |
+| Vulnerable dependencies | Check regularly with `composer audit` and `npm audit`. |
+
+A security contact is published at `/.well-known/security.txt` (renew its `Expires` date yearly).
+
+### Production security checklist
+
+1. Point the document root at `public/`, never the project folder.
+2. `APP_ENV=production`, `APP_DEBUG=false`, correct `APP_URL` (used for trusted hosts).
+3. Serve only over HTTPS and set `SESSION_SECURE_COOKIE=true`.
+4. Generate a fresh `APP_KEY` on the server (`php artisan key:generate`) and never reuse the development key.
+5. Hide server versions in the Apache configuration: `ServerTokens Prod` and `ServerSignature Off` (in PHP: `expose_php = Off`).
+6. Make only `storage/` and `bootstrap/cache/` writable by the web server.
+7. Keep PHP, Composer and npm dependencies updated; run `composer audit` and `npm audit` before each deployment.
+8. If the site runs behind a proxy or CDN (e.g. Cloudflare), configure trusted proxies so rate limits see real visitor IPs.
 
 ## Search engine visibility
 

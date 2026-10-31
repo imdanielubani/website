@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\InquiryReceived;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -17,6 +18,11 @@ class FormsTest extends TestCase
         $this->withoutMiddleware(ValidateCsrfToken::class);
     }
 
+    private function startedSecondsAgo(int $seconds): string
+    {
+        return Crypt::encryptString((string) (time() - $seconds));
+    }
+
     private function contactData(array $overrides = []): array
     {
         return array_merge([
@@ -28,6 +34,7 @@ class FormsTest extends TestCase
             'inquiry_type' => 'customer',
             'message' => 'We would like to discuss wholesale fuel supply.',
             'consent' => '1',
+            'form_started' => $this->startedSecondsAgo(30),
         ], $overrides);
     }
 
@@ -44,6 +51,7 @@ class FormsTest extends TestCase
             'estimated_quantity' => 'Monthly, to be agreed',
             'message' => 'Please share availability and terms.',
             'consent' => '1',
+            'form_started' => $this->startedSecondsAgo(30),
         ], $overrides);
     }
 
@@ -78,6 +86,23 @@ class FormsTest extends TestCase
             ->assertSessionHasErrors('website');
 
         Mail::assertNothingSent();
+    }
+
+    public function test_time_trap_rejects_bots_replays_and_forgeries(): void
+    {
+        // Too fast, replayed after expiry, and a forged (unencrypted) value.
+        foreach ([$this->startedSecondsAgo(1), $this->startedSecondsAgo(7 * 60 * 60), (string) time()] as $value) {
+            $this->post(route('contact.submit'), $this->contactData(['form_started' => $value]))
+                ->assertSessionHasErrors('form_started');
+        }
+
+        Mail::assertNothingSent();
+    }
+
+    public function test_forms_render_time_trap_field(): void
+    {
+        $this->get(route('contact'))->assertSee('name="form_started"', false);
+        $this->get(route('inquiry'))->assertSee('name="form_started"', false);
     }
 
     public function test_business_inquiry_form_sends_inquiry(): void
