@@ -5,14 +5,14 @@
 
 <x-layouts.app
     title="Contact Us"
-    description="Contact AL.GLOBAL OIL SH.A in Tirana, Albania. Telephone, registered address and inquiry form for customers, suppliers, careers and general questions."
+    description="Contact AL.GLOBAL OIL SH.A in Tirana, Albania. Email, registered address and inquiry form for customers, suppliers, careers and general questions."
     image="office-sky"
     :breadcrumbs="[['name' => 'Contact']]"
 >
     <x-sections.page-hero
         eyebrow="Contact Us"
         title="Let’s talk energy"
-        lead="Reach our team in Tirana by phone or send us a message. Choose the inquiry type that fits and we will direct it to the right people."
+        lead="Reach our team in Tirana by email or send us a message. Choose the inquiry type that fits and we will direct it to the right people."
         image="office-sky"
         size="md"
         :breadcrumbs="[['name' => 'Contact']]"
