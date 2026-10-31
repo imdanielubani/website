@@ -14,11 +14,11 @@
                 </p>
                 <dl class="mt-8 grid max-w-md grid-cols-2 gap-6 text-sm">
                     <div>
-                        <dt class="text-white/40">NUIS</dt>
+                        <dt class="text-white/60">NUIS</dt>
                         <dd class="mt-1 font-medium tracking-wide">{{ config('company.nuis') }}</dd>
                     </div>
                     <div>
-                        <dt class="text-white/40">{{ __('Established') }}</dt>
+                        <dt class="text-white/60">{{ __('Established') }}</dt>
                         <dd class="mt-1 font-medium">{{ \Illuminate\Support\Carbon::parse(config('company.founded'))->translatedFormat('j F Y') }}</dd>
                     </div>
                 </dl>
@@ -59,11 +59,11 @@
                         </p>
                         <p>
                             @foreach (config('company.contact.phones') as $phone)
-                                <a class="link-line font-normal hover:text-white" href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a><br>
+                                <a class="link-line inline-block py-0.5 font-normal hover:text-white" href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a><br>
                             @endforeach
                         </p>
                         @if ($email)
-                            <p><a class="link-line font-normal hover:text-white" href="mailto:{{ $email }}">{{ $email }}</a></p>
+                            <p><a class="link-line inline-block py-0.5 font-normal hover:text-white" href="mailto:{{ $email }}">{{ $email }}</a></p>
                         @else
                             <p><a class="link-line font-normal hover:text-white" href="{{ lroute('contact') }}">{{ __('Send us a message') }}</a></p>
                         @endif
