@@ -1,2 +1,14 @@
+# This site must not appear in search results.
+#
+# Google and Bing may crawl so they can read the "noindex" instruction that
+# every page and file carries (X-Robots-Tag header and robots meta tag).
+# Blocking them here would hide that instruction, and a blocked URL can
+# still be listed in results from external links.
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Bingbot
+Disallow:
+
+# All other crawlers are blocked entirely.
 User-agent: *
 Disallow: /

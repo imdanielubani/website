@@ -1,3 +1,9 @@
+# Keep every file served from public/ (pages, images, documents, assets)
+# out of search engines. Laravel responses also set this header.
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

@@ -46,11 +46,30 @@ class PagesTest extends TestCase
 
     public function test_pages_are_excluded_from_search_engines(): void
     {
-        $this->get('/')
-            ->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive')
-            ->assertSee('<meta name="robots" content="noindex, nofollow, noarchive">', false);
+        $directive = 'noindex, nofollow, noarchive, nosnippet, noimageindex';
 
-        $this->assertStringContainsString('Disallow: /', file_get_contents(public_path('robots.txt')));
+        $this->get('/')
+            ->assertHeader('X-Robots-Tag', $directive)
+            ->assertSee('<meta name="robots" content="' . $directive . '">', false);
+
+        // Error responses never reach a route, so the header must be applied globally.
+        $this->get('/this-page-does-not-exist')->assertHeader('X-Robots-Tag', $directive);
+        $this->get('/news/no-such-article')->assertHeader('X-Robots-Tag', $directive);
+
+        // Files served directly by Apache get the header from public/.htaccess.
+        $this->assertStringContainsString('Header set X-Robots-Tag "' . $directive . '"', file_get_contents(public_path('.htaccess')));
+
+        $this->assertStringContainsString('<meta name="robots" content="' . $directive . '">', file_get_contents(resource_path('views/errors/500.blade.php')));
+    }
+
+    public function test_robots_txt_lets_search_engines_see_noindex_and_blocks_others(): void
+    {
+        $robots = file_get_contents(public_path('robots.txt'));
+
+        // Google and Bing must be allowed to fetch pages, or they never see the noindex rule.
+        $this->assertMatchesRegularExpression('/User-agent: Googlebot\R(User-agent: .+\R)*Disallow:\s*\R/', $robots);
+        $this->assertStringContainsString("User-agent: *\nDisallow: /", str_replace("\r\n", "\n", $robots));
+        $this->assertStringNotContainsStringIgnoringCase('sitemap', preg_replace('/^#.*$/m', '', $robots));
     }
 
     public function test_company_email_is_published(): void

@@ -11,9 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(append: [
-            \App\Http\Middleware\NoIndex::class,
-        ]);
+        // Global, so error pages (404, 500...) carry the header too.
+        $middleware->append(\App\Http\Middleware\NoIndex::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

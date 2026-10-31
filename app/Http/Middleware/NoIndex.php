@@ -16,7 +16,7 @@ class NoIndex
         $response = $next($request);
 
         if (config('site.noindex')) {
-            $response->headers->set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+            $response->headers->set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
         }
 
         return $response;

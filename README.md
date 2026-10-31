@@ -216,13 +216,24 @@ Animations are declared with data attributes in templates and implemented in `re
 
 ## Search engine visibility
 
-The site is intentionally hidden from search engines:
+The site is intentionally hidden from search engines. Every page, error page, image, document and asset carries a noindex instruction:
 
-- `public/robots.txt` disallows all crawlers.
-- Every response includes `X-Robots-Tag: noindex, nofollow, noarchive` (`app/Http/Middleware/NoIndex.php`).
-- Every page renders `<meta name="robots" content="noindex, nofollow, noarchive">`.
+- **HTTP header** `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex`
+  - on every Laravel response, including 404 and other error pages (`app/Http/Middleware/NoIndex.php`, registered globally in `bootstrap/app.php`);
+  - on every file Apache serves directly from `public/`, such as photos, logos, the letterheads and built assets (`public/.htaccess`, requires `mod_headers`).
+- **Meta tag** `<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">` on every page, including the self-contained 500 page.
+- **`public/robots.txt`** allows Googlebot, Googlebot-Image and Bingbot to fetch pages so they can read the noindex instruction, and blocks all other crawlers. (Blocking Google in robots.txt would hide the noindex rule, and blocked URLs can still appear in results as bare links.)
+- **No XML sitemap** is published.
 
-No XML sitemap is published while the site is hidden. To make the site public later, set `SITE_NOINDEX=false`, replace `public/robots.txt` with an allow rule, and add a sitemap.
+On **Nginx**, `.htaccess` is ignored. Add this to the server block instead:
+
+```nginx
+add_header X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" always;
+```
+
+After deployment, check a page and an image with `curl -I https://your-domain/` and `curl -I https://your-domain/favicon.svg`; both should show the `X-Robots-Tag` header. If any URL was indexed before these rules were live, request removal in Google Search Console (Removals).
+
+To make the site public later: set `SITE_NOINDEX=false`, remove the header block from `public/.htaccess`, allow all crawlers in `public/robots.txt`, and add a sitemap.
 
 SEO foundations are already in place for that moment: unique titles and descriptions, canonical URLs, Open Graph and Twitter cards, Organization, BreadcrumbList and Article structured data, semantic headings and descriptive URLs.
 

@@ -26,7 +26,7 @@
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonicalUrl }}">
     @if (config('site.noindex'))
-        <meta name="robots" content="noindex, nofollow, noarchive">
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     @endif
 
     <meta property="og:site_name" content="{{ $company }}">
