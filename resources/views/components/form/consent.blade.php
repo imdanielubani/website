@@ -13,3 +13,6 @@
     <label for="f-website">Website</label>
     <input id="f-website" type="text" name="website" tabindex="-1" autocomplete="off">
 </div>
+
+{{-- Time trap: when the form was rendered, encrypted so it cannot be forged. --}}
+<input type="hidden" name="form_started" value="{{ \Illuminate\Support\Facades\Crypt::encryptString((string) time()) }}">

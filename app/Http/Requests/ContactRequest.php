@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\HumanSubmissionTime;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -36,6 +37,8 @@ class ContactRequest extends FormRequest
             'consent' => ['accepted'],
             // Honeypot: real visitors never see or fill this field.
             'website' => ['nullable', 'max:0'],
+            // Time trap: encrypted render timestamp from x-form.consent.
+            'form_started' => ['required', 'string', new HumanSubmissionTime],
         ];
     }
 
