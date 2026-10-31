@@ -18,7 +18,8 @@
             'taxID' => config('company.nuis'),
             'description' => __(config('company.registered_activity')),
             'inLanguage' => app()->getLocale(),
-            'telephone' => config('company.contact.phones')[0] ?? null,
+            // Phone numbers hidden for now. Remove this comment to show them again.
+            // 'telephone' => config('company.contact.phones')[0] ?? null,
             'email' => config('company.contact.email'),
             'address' => [
                 '@type' => 'PostalAddress',

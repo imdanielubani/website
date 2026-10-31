@@ -36,6 +36,7 @@
                             @endforeach
                         </ol>
                         <p class="mt-8 text-sm leading-relaxed text-stone" data-reveal>{{ __('Please do not include confidential documents in this form. If needed, our team will arrange a secure way to exchange them.') }}</p>
+                        {{-- Phone numbers hidden for now. Remove this comment to show them again.
                         <div class="mt-8 flex gap-4" data-reveal>
                             <x-icon name="phone" class="mt-0.5 size-5 text-olive" />
                             <div class="space-y-1">
@@ -44,8 +45,10 @@
                                 @endforeach
                             </div>
                         </div>
+                        --}}
                         @if (config('company.contact.email'))
-                            <div class="mt-5 flex gap-4" data-reveal>
+                            {{-- When the phone numbers above are shown again, change mt-8 back to mt-5. --}}
+                            <div class="mt-8 flex gap-4" data-reveal>
                                 <x-icon name="mail" class="mt-0.5 size-5 text-olive" />
                                 <a href="mailto:{{ config('company.contact.email') }}" class="link-line block w-fit font-normal break-all text-ink-2">{{ config('company.contact.email') }}</a>
                             </div>

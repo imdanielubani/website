@@ -177,14 +177,17 @@
 
             <div class="mt-10 grid gap-8 sm:grid-cols-2">
                 <div>
+                    {{-- Phone numbers hidden for now. Remove this comment to show them again.
                     <p class="eyebrow text-white/50">{{ __('Call') }}</p>
                     <ul class="mt-3 space-y-1 text-lg">
                         @foreach (config('company.contact.phones') as $phone)
                             <li><a href="tel:{{ preg_replace('/\s+/', '', $phone) }}" class="hover:text-accent">{{ $phone }}</a></li>
                         @endforeach
                     </ul>
+                    --}}
                     @if (config('company.contact.email'))
-                        <p class="eyebrow mt-8 text-white/50">{{ __('Email') }}</p>
+                        {{-- When the phone numbers above are shown again, add "mt-8" back to this label. --}}
+                        <p class="eyebrow text-white/50">{{ __('Email') }}</p>
                         <a href="mailto:{{ config('company.contact.email') }}" class="mt-3 block text-lg break-all hover:text-accent">{{ config('company.contact.email') }}</a>
                     @endif
                 </div>

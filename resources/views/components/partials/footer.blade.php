@@ -57,11 +57,13 @@
                                 {{ $line }}<br>
                             @endforeach
                         </p>
+                        {{-- Phone numbers hidden for now. Remove this comment to show them again.
                         <p>
                             @foreach (config('company.contact.phones') as $phone)
                                 <a class="link-line inline-block py-0.5 font-normal hover:text-white" href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a><br>
                             @endforeach
                         </p>
+                        --}}
                         @if ($email)
                             <p><a class="link-line inline-block py-0.5 font-normal hover:text-white" href="mailto:{{ $email }}">{{ $email }}</a></p>
                         @else

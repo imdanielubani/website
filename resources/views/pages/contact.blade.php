@@ -39,6 +39,7 @@
                                     </dd>
                                 </div>
                             </div>
+                            {{-- Phone numbers hidden for now. Remove this comment to show them again.
                             <div class="flex gap-4 py-6">
                                 <x-icon name="phone" class="mt-0.5 size-5 text-olive" />
                                 <div>
@@ -50,6 +51,7 @@
                                     </dd>
                                 </div>
                             </div>
+                            --}}
                             <div class="flex gap-4 py-6">
                                 <x-icon name="mail" class="mt-0.5 size-5 text-olive" />
                                 <div>
