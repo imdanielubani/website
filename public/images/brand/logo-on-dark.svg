@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 40" width="236" height="40">
+  <mask id="m"><rect width="40" height="40" fill="#fff"/><rect y="19.4" width="40" height="1.9" fill="#000"/><rect y="24.6" width="40" height="1.9" fill="#000"/><rect y="29.8" width="40" height="1.9" fill="#000"/></mask>
+  <rect width="40" height="40" fill="#e2e890"/>
+  <path d="M20 4.5C20 4.5 8.5 17.4 8.5 24.6a11.5 11.5 0 0 0 23 0C31.5 17.4 20 4.5 20 4.5Z" fill="#1b1b19" mask="url(#m)"/>
+  <text x="52" y="22" font-family="Manrope, Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.9" fill="#ffffff">AL.GLOBAL</text>
+  <text x="53" y="36" font-family="Inter, Arial, sans-serif" font-size="8.4" font-weight="600" letter-spacing="3.1" fill="#ffffff" fill-opacity="0.7">OIL SH.A</text>
+</svg>
