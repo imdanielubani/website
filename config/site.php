@@ -27,4 +27,22 @@ return [
 
     'inquiry_recipient' => env('INQUIRY_RECIPIENT', 'info@alglobaloilsha.com'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Languages
+    |--------------------------------------------------------------------------
+    |
+    | The default language is served without a URL prefix (/about); every
+    | other language lives under its code (/sq/about). Translations are in
+    | lang/{code}.json and lang/{code}/*.php.
+    |
+    */
+
+    'default_locale' => 'en',
+
+    'locales' => [
+        'en' => ['name' => 'English', 'short' => 'EN', 'og' => 'en_GB'],
+        'sq' => ['name' => 'Shqip', 'short' => 'SQ', 'og' => 'sq_AL'],
+    ],
+
 ];

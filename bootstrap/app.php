@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Global, so error pages (404, 500...) carry the headers too.
         $middleware->append([
+            \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\NoIndex::class,
             \App\Http\Middleware\SecurityHeaders::class,
         ]);
