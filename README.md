@@ -22,7 +22,6 @@ Built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, **Vite**, **Alpine.js*
 - [Forms](#forms)
 - [Motion and accessibility](#motion-and-accessibility)
 - [Search engine visibility](#search-engine-visibility)
-- [Information awaiting confirmation](#information-awaiting-confirmation)
 
 ---
 
@@ -236,30 +235,3 @@ After deployment, check a page and an image with `curl -I https://your-domain/` 
 To make the site public later: set `SITE_NOINDEX=false`, remove the header block from `public/.htaccess`, allow all crawlers in `public/robots.txt`, and add a sitemap.
 
 SEO foundations are already in place for that moment: unique titles and descriptions, canonical URLs, Open Graph and Twitter cards, Organization, BreadcrumbList and Article structured data, semantic headings and descriptive URLs.
-
-## Information awaiting confirmation
-
-The following facts come from the company's public entry in the Albanian business register (QKB) and are used on the site:
-
-- Name, legal form (SH.A) and NUIS `L62214509P`
-- Founding date 11 October 2016 and registration date 14 October 2016
-- Registered object of activity, with processing added on 31 January 2018
-- Registered seat in Tirana and business locations in Fier (Drizë) and Durrës (Porto Romano hydrocarbons terminal)
-- Telephone numbers +355 68 204 4754 and +355 69 204 4754
-- Email info@alglobaloilsha.com (supplied by the company)
-- Licence VIII.1.A and environmental permits III.1.B and III.1.C
-
-Please confirm or supply:
-
-- [ ] Current validity of the listed licence and permits
-- [ ] Current product range, grades and specifications
-- [ ] Processing operations: facility, operating status, capacity and products
-- [ ] Facility specifications: storage, marine access, loading and handling capacity
-- [ ] HSE policy, environmental policy and any certifications (as downloadable documents)
-- [ ] Approved mission and vision wording
-- [ ] Leadership profiles and organisational chart
-- [ ] Additional company milestones
-- [ ] Real news articles to replace the sample content
-- [ ] Company photography of people, offices and sites
-- [ ] Social media profile URLs (`config/company.php` → `social`)
-- [ ] Legal review of the Privacy Policy, Cookie Policy and Terms & Conditions
