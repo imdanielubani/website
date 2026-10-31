@@ -24,3 +24,7 @@ yarn-error.log
 
 # Internal notes kept off GitHub
 /OPEN-ITEMS.md
+
+# Local database files (the site does not use a database)
+*.sqlite
+*.sqlite-journal
