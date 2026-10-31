@@ -177,7 +177,7 @@ To replace a photo, export both sizes as WebP with the same file names, update `
 
 Current photography is stock imagery used under the Unsplash License and should ideally be replaced with the company's own photographs of its people and locations.
 
-An A4 letterhead (`letterhead-a4.png`, 2480×3508 px, 300 dpi) is in the same folder. Logo files are in `public/images/brand/`: SVG (`logo-on-light.svg`, `logo-on-dark.svg`, `logo-mark.svg`) and high-resolution PNG (`logo-on-light.png` and `logo-on-dark.png` with transparent backgrounds, `logo-on-light-background.png`, `logo-on-dark-background.png`, and 1024px `logo-mark.png` / `logo-mark-accent.png`). The favicon is `public/favicon.svg`. The header and footer logo is the Blade component `resources/views/components/logo.blade.php`.
+An A4 letterhead is in the same folder as a 300 dpi image (`letterhead-a4.png`) and as an editable Word document (`letterhead-a4.docx`) with the branding in the header and footer and a letter template in the body. Logo files are in `public/images/brand/`: SVG (`logo-on-light.svg`, `logo-on-dark.svg`, `logo-mark.svg`) and high-resolution PNG (`logo-on-light.png` and `logo-on-dark.png` with transparent backgrounds, `logo-on-light-background.png`, `logo-on-dark-background.png`, and 1024px `logo-mark.png` / `logo-mark-accent.png`). The favicon is `public/favicon.svg`. The header and footer logo is the Blade component `resources/views/components/logo.blade.php`.
 
 ## Forms
 
