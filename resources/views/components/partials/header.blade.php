@@ -2,10 +2,10 @@
     $nav = config('navigation');
     $isActive = function (array $item): bool {
         if (isset($item['route'])) {
-            return request()->routeIs($item['route'], $item['route'] . '.*');
+            return route_is($item['route'], $item['route'] . '.*');
         }
 
-        return collect($item['children'] ?? [])->contains(fn ($child) => request()->routeIs($child['route']));
+        return collect($item['children'] ?? [])->contains(fn ($child) => route_is($child['route']));
     };
 @endphp
 
@@ -20,11 +20,11 @@
     }"
 >
     <div class="container-site flex items-center justify-between gap-6 transition-[height] duration-700 ease-out-expo h-20 sm:h-22" :class="scrolled && 'h-18!'">
-        <x-logo tone="dark" :href="route('home')" class="relative z-10" />
+        <x-logo tone="dark" :href="lroute('home')" class="relative z-10" />
 
         {{-- Desktop navigation --}}
-        <nav aria-label="Primary" class="hidden xl:block">
-            <ul class="flex items-center gap-9">
+        <nav aria-label="{{ __('Primary') }}" class="hidden xl:block">
+            <ul class="flex items-center gap-7 2xl:gap-9">
                 @foreach ($nav as $index => $item)
                     <li>
                         @isset($item['children'])
@@ -38,15 +38,15 @@
                                 x-on:mouseenter="open({{ $index }})"
                                 x-on:mouseleave="scheduleClose()"
                             >
-                                {{ $item['label'] }}
+                                {{ __($item['label']) }}
                                 <svg viewBox="0 0 16 16" class="size-3.5 transition-transform duration-500" :class="panel === {{ $index }} && 'rotate-180'" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
                             </button>
                         @else
                             <a
-                                href="{{ route($item['route']) }}"
+                                href="{{ lroute($item['route']) }}"
                                 class="nav-link {{ $isActive($item) ? 'text-white' : 'text-white/80 hover:text-white' }}"
                                 @if ($isActive($item)) aria-current="page" @endif
-                            >{{ $item['label'] }}</a>
+                            >{{ __($item['label']) }}</a>
                         @endisset
                     </li>
                 @endforeach
@@ -54,7 +54,8 @@
         </nav>
 
         <div class="flex items-center gap-3">
-            <x-buttons.primary :href="route('contact')" class="hidden sm:inline-flex">Contact Us</x-buttons.primary>
+            <x-language-switcher class="relative z-10 hidden min-[370px]:flex" />
+            <x-buttons.primary :href="lroute('contact')" class="hidden sm:inline-flex">{{ __('Contact Us') }}</x-buttons.primary>
 
             <button
                 type="button"
@@ -63,7 +64,7 @@
                 :aria-expanded="mobileOpen.toString()"
                 aria-controls="mobile-menu"
             >
-                <span class="sr-only" x-text="mobileOpen ? 'Close menu' : 'Open menu'">Open menu</span>
+                <span class="sr-only" x-text="mobileOpen ? {{ Js::from(__('Close menu')) }} : {{ Js::from(__('Open menu')) }}">{{ __('Open menu') }}</span>
                 <span class="relative block h-3 w-5" aria-hidden="true">
                     <span class="absolute left-0 h-px w-5 bg-current transition-all duration-500 ease-out-expo" :class="mobileOpen ? 'top-1.5 rotate-45' : 'top-0'"></span>
                     <span class="absolute left-0 h-px bg-current transition-all duration-500 ease-out-expo" :class="mobileOpen ? 'top-1.5 w-5 -rotate-45' : 'top-3 w-3'"></span>
@@ -92,23 +93,23 @@
                 <div class="container-site grid grid-cols-12 gap-10 py-12">
                     <div class="col-span-3 flex flex-col justify-between">
                         <div>
-                            <p class="eyebrow text-white/60">{{ $item['label'] }}</p>
-                            <p class="mt-5 text-lg leading-relaxed text-white/80">{{ $item['intro'] }}</p>
+                            <p class="eyebrow text-white/60">{{ __($item['label']) }}</p>
+                            <p class="mt-5 text-lg leading-relaxed text-white/80">{{ __($item['intro']) }}</p>
                         </div>
-                        <a href="{{ route('inquiry') }}" class="link-line mt-8 self-start text-sm text-accent">Start a business inquiry</a>
+                        <a href="{{ lroute('inquiry') }}" class="link-line mt-8 self-start text-sm text-accent">{{ __('Start a business inquiry') }}</a>
                     </div>
                     <ul class="col-span-9 grid gap-5 {{ count($item['children']) > 2 ? 'grid-cols-4' : 'grid-cols-2' }}">
                         @foreach ($item['children'] as $child)
                             <li>
-                                <a href="{{ route($child['route']) }}" class="group block" @if (request()->routeIs($child['route'])) aria-current="page" @endif>
+                                <a href="{{ lroute($child['route']) }}" class="group block" @if (route_is($child['route'])) aria-current="page" @endif>
                                     <div class="img-frame img-zoom aspect-[4/3]">
                                         <x-img :key="$child['image']" sizes="22vw" alt="" />
                                         <div class="absolute inset-0 bg-ink/20 transition-colors duration-700 group-hover:bg-ink/0"></div>
                                     </div>
                                     <div class="mt-4 flex items-start justify-between gap-3">
                                         <div>
-                                            <p class="font-display text-lg font-semibold tracking-[-0.02em]">{{ $child['label'] }}</p>
-                                            <p class="mt-1 text-sm text-white/60">{{ $child['text'] }}</p>
+                                            <p class="font-display text-lg font-semibold tracking-[-0.02em]">{{ __($child['label']) }}</p>
+                                            <p class="mt-1 text-sm text-white/60">{{ __($child['text']) }}</p>
                                         </div>
                                         <svg viewBox="0 0 16 16" class="mt-1.5 size-4 shrink-0 text-accent transition-transform duration-500 ease-out-expo group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
                                     </div>
@@ -135,9 +136,10 @@
         class="fixed inset-0 z-0 flex h-dvh flex-col overflow-y-auto overscroll-contain bg-ink pt-24 xl:hidden"
         role="dialog"
         aria-modal="true"
-        aria-label="Site menu"
+        aria-label="{{ __('Site menu') }}"
     >
-        <nav aria-label="Mobile" class="container-site flex-1 pb-10">
+        <nav aria-label="{{ __('Mobile') }}" class="container-site flex-1 pb-10">
+            <x-language-switcher size="lg" class="mb-8 w-fit min-[370px]:hidden" />
             <ul class="divide-y divide-white/10 border-y border-white/10">
                 @foreach ($nav as $index => $item)
                     <li x-data="{ expanded: {{ $isActive($item) && isset($item['children']) ? 'true' : 'false' }} }">
@@ -148,7 +150,7 @@
                                 x-on:click="expanded = !expanded"
                                 :aria-expanded="expanded.toString()"
                             >
-                                {{ $item['label'] }}
+                                {{ __($item['label']) }}
                                 <span class="grid size-9 place-items-center bg-white/8" aria-hidden="true">
                                     <svg viewBox="0 0 16 16" class="size-4 transition-transform duration-500" :class="expanded && 'rotate-45'" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3 8h10" /></svg>
                                 </span>
@@ -156,43 +158,43 @@
                             <ul x-show="expanded" x-collapse class="space-y-1 pb-5">
                                 @foreach ($item['children'] as $child)
                                     <li>
-                                        <a href="{{ route($child['route']) }}" class="flex items-center justify-between gap-4 py-2.5 text-lg text-white/75 hover:text-white" @if (request()->routeIs($child['route'])) aria-current="page" @endif>
-                                            {{ $child['label'] }}
+                                        <a href="{{ lroute($child['route']) }}" class="flex items-center justify-between gap-4 py-2.5 text-lg text-white/75 hover:text-white" @if (route_is($child['route'])) aria-current="page" @endif>
+                                            {{ __($child['label']) }}
                                             <svg viewBox="0 0 16 16" class="size-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
                         @else
-                            <a href="{{ route($item['route']) }}" class="block py-5 font-display text-[1.75rem] font-semibold tracking-[-0.03em] {{ $isActive($item) ? 'text-accent' : '' }}" @if ($isActive($item)) aria-current="page" @endif>{{ $item['label'] }}</a>
+                            <a href="{{ lroute($item['route']) }}" class="block py-5 font-display text-[1.75rem] font-semibold tracking-[-0.03em] {{ $isActive($item) ? 'text-accent' : '' }}" @if ($isActive($item)) aria-current="page" @endif>{{ __($item['label']) }}</a>
                         @endisset
                     </li>
                 @endforeach
                 <li>
-                    <a href="{{ route('contact') }}" class="block py-5 font-display text-[1.75rem] font-semibold tracking-[-0.03em] {{ request()->routeIs('contact') ? 'text-accent' : '' }}">Contact</a>
+                    <a href="{{ lroute('contact') }}" class="block py-5 font-display text-[1.75rem] font-semibold tracking-[-0.03em] {{ route_is('contact') ? 'text-accent' : '' }}">{{ __('Contact') }}</a>
                 </li>
             </ul>
 
             <div class="mt-10 grid gap-8 sm:grid-cols-2">
                 <div>
-                    <p class="eyebrow text-white/50">Call</p>
+                    <p class="eyebrow text-white/50">{{ __('Call') }}</p>
                     <ul class="mt-3 space-y-1 text-lg">
                         @foreach (config('company.contact.phones') as $phone)
                             <li><a href="tel:{{ preg_replace('/\s+/', '', $phone) }}" class="hover:text-accent">{{ $phone }}</a></li>
                         @endforeach
                     </ul>
                     @if (config('company.contact.email'))
-                        <p class="eyebrow mt-8 text-white/50">Email</p>
+                        <p class="eyebrow mt-8 text-white/50">{{ __('Email') }}</p>
                         <a href="mailto:{{ config('company.contact.email') }}" class="mt-3 block text-lg break-all hover:text-accent">{{ config('company.contact.email') }}</a>
                     @endif
                 </div>
                 <div>
-                    <p class="eyebrow text-white/50">Headquarters</p>
+                    <p class="eyebrow text-white/50">{{ __('Headquarters') }}</p>
                     <p class="mt-3 text-white/70">{{ implode(', ', config('company.locations.tirana.lines')) }}</p>
                 </div>
             </div>
 
-            <x-buttons.primary :href="route('inquiry')" class="mt-10 w-full justify-between sm:hidden">Business Inquiry</x-buttons.primary>
+            <x-buttons.primary :href="lroute('inquiry')" class="mt-10 w-full justify-between sm:hidden">{{ __('Business Inquiry') }}</x-buttons.primary>
         </nav>
     </div>
 </header>
