@@ -1,15 +1,31 @@
-# Keep every file served from public/ (pages, images, documents, assets)
-# out of search engines. Laravel responses also set this header.
+# Never list directory contents.
+Options -Indexes -MultiViews
+
 <IfModule mod_headers.c>
+    # Keep every file served from public/ (pages, images, documents, assets)
+    # out of search engines. Laravel responses also set this header.
     Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+
+    # Baseline security headers for static files. Laravel pages receive the
+    # full set, including the Content Security Policy, from SecurityHeaders.
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Cross-Origin-Resource-Policy "same-origin"
+
+    # Do not advertise server technology.
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
     RewriteEngine On
+
+    # Block hidden files and folders (.htaccess, .git, .env...) except .well-known.
+    RewriteRule (^|/)\.(?!well-known(/|$)) - [F,L]
+
+    # Block backup, source and config files that should never be public.
+    RewriteRule \.(bak|old|orig|sql|sqlite|log|ini|sh|swp|dist|lock|env|yml|yaml)$ - [F,L,NC]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

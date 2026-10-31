@@ -1,0 +1,18 @@
+# Security: only the public/ directory may ever be served.
+#
+# On a correctly configured server the document root points at public/ and
+# this file is never read. On setups that expose the project folder itself
+# (shared hosting, XAMPP htdocs), it stops .env, logs, sessions, the Git
+# repository, vendor code and every other private file from being downloaded.
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^public(/|$) - [L]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
