@@ -44,7 +44,7 @@
     <meta name="theme-color" content="#0f0f0d">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
-    <script>
+    <script nonce="{{ \Illuminate\Support\Facades\Vite::cspNonce() }}">
         (function () {
             var d = document.documentElement;
             d.classList.replace('no-js', 'js');

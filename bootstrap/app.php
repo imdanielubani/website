@@ -11,8 +11,20 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Global, so error pages (404, 500...) carry the header too.
-        $middleware->append(\App\Http\Middleware\NoIndex::class);
+        // Global, so error pages (404, 500...) carry the headers too.
+        $middleware->append([
+            \App\Http\Middleware\NoIndex::class,
+            \App\Http\Middleware\SecurityHeaders::class,
+        ]);
+
+        // Reject requests for unknown host names (host header poisoning).
+        // Active outside the local environment; trusts APP_URL's host.
+        $middleware->trustHosts();
+
+        // Site-wide request limit per IP address.
+        $middleware->web(append: [
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':site',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
