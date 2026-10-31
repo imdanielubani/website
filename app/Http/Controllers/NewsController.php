@@ -55,6 +55,8 @@ class NewsController extends Controller
     {
         $page = LengthAwarePaginator::resolveCurrentPage();
 
+        abort_if($page > max(1, (int) ceil($items->count() / self::PER_PAGE)), 404);
+
         return new LengthAwarePaginator(
             $items->forPage($page, self::PER_PAGE)->values(),
             $items->count(),
