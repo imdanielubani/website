@@ -73,6 +73,15 @@ return [
             'replace_placeholders' => true,
         ],
 
+        // Backup record of every contact and business inquiry submission.
+        'inquiries' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/inquiries.log'),
+            'level' => 'info',
+            'days' => env('INQUIRY_LOG_DAYS', 90),
+            'replace_placeholders' => true,
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
