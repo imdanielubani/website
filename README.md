@@ -1,66 +1,254 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AL.GLOBAL OIL SH.A — Corporate Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Corporate website for **AL.GLOBAL OIL SH.A**, an Albanian petroleum and hydrocarbons company established in Tirana in 2016.
 
-## About Laravel
+Built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, **Vite**, **Alpine.js** and **GSAP**. The site runs without a database: page content lives in Blade templates and configuration files, news articles in a version-controlled content file, and form submissions are emailed to the company and written to a log.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> The site is configured **not to be indexed by search engines** (see [Search engine visibility](#search-engine-visibility)).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Contents
 
-## Learning Laravel
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Environment variables](#environment-variables)
+- [Development](#development)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Project structure](#project-structure)
+- [Editing content](#editing-content)
+- [Replacing images](#replacing-images)
+- [Forms](#forms)
+- [Motion and accessibility](#motion-and-accessibility)
+- [Search engine visibility](#search-engine-visibility)
+- [Information awaiting confirmation](#information-awaiting-confirmation)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+ with the standard Laravel extensions (`mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `fileinfo`)
+- Composer 2
+- Node.js 20+ and npm
 
-## Laravel Sponsors
+No database server is required.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation
 
-### Premium Partners
+```bash
+git clone https://github.com/imdanielubani/website.git
+cd website
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+composer install
+npm install
 
-## Contributing
+cp .env.example .env
+php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+npm run build
+php artisan serve
+```
 
-## Code of Conduct
+Open http://127.0.0.1:8000.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+On XAMPP/Apache, point the virtual host's document root at the `public/` directory.
 
-## Security Vulnerabilities
+## Environment variables
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Variable | Purpose |
+| --- | --- |
+| `APP_NAME` | Site name, used in emails. Default `"AL.GLOBAL OIL SH.A"`. |
+| `APP_ENV` / `APP_DEBUG` | Use `production` and `false` on the live server. |
+| `APP_URL` | Full public URL, e.g. `https://www.example.al`. Used for canonical and Open Graph URLs. |
+| `SESSION_DRIVER`, `CACHE_STORE` | `file` (no database needed). |
+| `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_SCHEME` | Outgoing mail for form notifications. With `MAIL_MAILER=log`, emails are written to `storage/logs/laravel.log`. |
+| `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` | Sender of form notification emails. |
+| `INQUIRY_RECIPIENT` | Inbox that receives contact and business inquiries. |
+| `COMPANY_EMAIL` | Public email shown on the site. Leave empty until confirmed; a contact-form link is shown instead. |
+| `SITE_NOINDEX` | `true` (default) keeps search engines out. |
 
-## License
+Never commit `.env`; it contains secrets.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Development
+
+```bash
+npm run dev          # Vite dev server with hot reload
+php artisan serve    # Laravel on http://127.0.0.1:8000
+```
+
+## Testing
+
+```bash
+php artisan test
+```
+
+Feature tests cover every page (status, SEO metadata, single `<h1>`), noindex headers, the custom 404 page, image library integrity, news publishing rules, and validation, delivery, honeypot and rate limiting of both forms.
+
+## Deployment
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm ci && npm run build
+
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+Checklist:
+
+1. Set `APP_ENV=production`, `APP_DEBUG=false` and the correct `APP_URL`.
+2. Configure SMTP (or another mail transport) and `INQUIRY_RECIPIENT`, then submit a test inquiry.
+3. Make `storage/` and `bootstrap/cache/` writable by the web server.
+4. Serve over HTTPS and point the document root to `public/`.
+5. Built assets in `public/build` are fingerprinted, so they can be cached long-term by the web server or CDN.
+
+After changing `.env` or configuration on a server using `config:cache`, run `php artisan config:cache` again.
+
+## Project structure
+
+```
+app/
+  Content/            NewsArticle value object and NewsRepository
+  Http/Controllers/   Home, Page, News, Contact and Inquiry controllers
+  Http/Middleware/    NoIndex (X-Robots-Tag header)
+  Http/Requests/      Form validation for contact and business inquiries
+  Mail/               InquiryReceived notification
+  Support/            InquiryDispatcher (log + email delivery)
+config/
+  company.php         Company facts, addresses, phones, licences
+  images.php          Image library (keys, files, sizes, alt text)
+  navigation.php      Header, mega menu, mobile menu and footer links
+  site.php            Noindex switch and inquiry recipient
+resources/
+  content/news.php    News articles
+  css/app.css         Design tokens and component styles
+  js/                 Alpine components, GSAP animations, page transitions, icons
+  views/
+    components/       Layout, header, footer, cookie consent, buttons, sections, forms
+    pages/            One template per page (including news/ and legal/)
+    errors/           404, 419, 429 and 500 pages
+    emails/           Inquiry notification email
+public/images/
+  brand/              Logo files
+  photos/             Optimised WebP photography
+routes/web.php        Named routes
+tests/Feature/        Feature tests
+```
+
+## Editing content
+
+- **Company details** (address, phones, NUIS, licences, email): `config/company.php`. Changes appear site-wide: header, footer, contact page, structured data.
+- **Navigation**: `config/navigation.php`.
+- **Page copy**: the matching template in `resources/views/pages/`.
+- **Design tokens** (colours, fonts, type scale): the `@theme` block at the top of `resources/css/app.css`.
+
+### News articles
+
+Articles are stored in `resources/content/news.php`. Each entry supports:
+
+`title`, `slug`, `excerpt`, `content` (Markdown), `featured_image` (an image key), `category`, `author`, `published_at`, `is_published`, `seo_title`, `seo_description`, `is_sample`.
+
+- An article is visible only when `is_published` is `true` and `published_at` is in the past, so drafts and scheduled posts can be stored safely.
+- Categories are created automatically from the `category` field and get their own URL (`/news/category/{slug}`).
+- The included articles are **sample content**, flagged with `is_sample => true`, which displays a notice on the site. Replace them with real company news before launch.
+
+`App\Content\NewsRepository` is the only class that reads this file, so it can be replaced with a CMS or database source later without changing controllers or views.
+
+### Placeholders
+
+Content awaiting confirmation is wrapped in the `<x-confirm>` component, which renders a discreet dashed "to be confirmed" label. Search the templates for `x-confirm` to find every placeholder.
+
+## Replacing images
+
+All photographs are registered in `config/images.php`:
+
+```php
+'refinery-river' => ['file' => 'refinery-river', 'w' => 2000, 'h' => 1335, 'alt' => '...'],
+```
+
+Each key maps to two files in `public/images/photos/`:
+
+- `{file}-lg.webp`, around 1920–2000 px wide
+- `{file}-sm.webp`, 960 px wide
+
+To replace a photo, export both sizes as WebP with the same file names, update `w`/`h` to the large image's dimensions, and update the `alt` text. Templates reference images by key through the `<x-img key="..." />` component, which handles `srcset`, lazy loading and dimensions to prevent layout shift.
+
+Current photography is stock imagery used under the Unsplash License and should ideally be replaced with the company's own photographs of its people and locations.
+
+Logo files are in `public/images/brand/` (`logo-on-light.svg`, `logo-on-dark.svg`, `logo-mark.svg`). The favicon is `public/favicon.svg`. The header and footer logo is the Blade component `resources/views/components/logo.blade.php`.
+
+## Forms
+
+| Form | URL | Fields |
+| --- | --- | --- |
+| Contact | `/contact` | Full name, company, email, phone, country, inquiry type (general, customer, supplier, careers, media), message |
+| Supplier / Business inquiry | `/business-inquiry` | Company, contact person, email, phone, country, inquiry type, product requirements, estimated quantity, message |
+
+Every submission is:
+
+1. Validated server-side (`app/Http/Requests`), with CSRF protection, a consent checkbox and a hidden honeypot field.
+2. Rate limited to 3 per minute and 15 per hour per IP address.
+3. Written to `storage/logs/inquiries-YYYY-MM-DD.log` (kept 90 days) as a backup record.
+4. Emailed to `INQUIRY_RECIPIENT` with the reply-to address set to the sender.
+
+Inquiry types can be preselected by URL, e.g. `/contact?type=careers` or `/business-inquiry?type=supply`.
+
+## Motion and accessibility
+
+Animations are declared with data attributes in templates and implemented in `resources/js/animations.js` using GSAP and ScrollTrigger:
+
+| Attribute | Effect |
+| --- | --- |
+| `data-hero` | Hero image settles, heading lines rise, supporting items fade in |
+| `data-split` | Heading revealed line by line |
+| `data-reveal` | Fade and rise (`up`, `fade` or `clip` for image mask reveals) |
+| `data-stagger` | Children revealed in sequence |
+| `data-parallax="10"` | Subtle image parallax |
+| `data-marquee` | Scroll-linked horizontal text band |
+| `data-count` | Count-up for verified figures only |
+
+- All motion is disabled when the visitor prefers reduced motion.
+- Content is fully visible in the HTML; hidden start states are applied only by JavaScript.
+- There is no scroll-jacking. Page transitions only intercept plain left-clicks on internal links, and browser history works normally.
+- The site includes skip-to-content, visible focus states, a keyboard-accessible mega menu, a focus-trapped mobile menu, labelled form fields with linked error messages, and alt text for every image.
+
+## Search engine visibility
+
+The site is intentionally hidden from search engines:
+
+- `public/robots.txt` disallows all crawlers.
+- Every response includes `X-Robots-Tag: noindex, nofollow, noarchive` (`app/Http/Middleware/NoIndex.php`).
+- Every page renders `<meta name="robots" content="noindex, nofollow, noarchive">`.
+
+No XML sitemap is published while the site is hidden. To make the site public later, set `SITE_NOINDEX=false`, replace `public/robots.txt` with an allow rule, and add a sitemap.
+
+SEO foundations are already in place for that moment: unique titles and descriptions, canonical URLs, Open Graph and Twitter cards, Organization, BreadcrumbList and Article structured data, semantic headings and descriptive URLs.
+
+## Information awaiting confirmation
+
+The following facts come from the company's public entry in the Albanian business register (QKB) and are used on the site:
+
+- Name, legal form (SH.A) and NUIS `L62214509P`
+- Founding date 11 October 2016 and registration date 14 October 2016
+- Registered object of activity, with processing added on 31 January 2018
+- Registered seat in Tirana and business locations in Fier (Drizë) and Durrës (Porto Romano hydrocarbons terminal)
+- Telephone numbers +355 68 204 4754 and +355 69 204 4754
+- Licence VIII.1.A and environmental permits III.1.B and III.1.C
+
+Please confirm or supply:
+
+- [ ] Official public email address (`COMPANY_EMAIL`) and the inbox for form submissions (`INQUIRY_RECIPIENT`)
+- [ ] Current validity of the listed licence and permits
+- [ ] Current product range, grades and specifications
+- [ ] Processing operations: facility, operating status, capacity and products
+- [ ] Facility specifications: storage, marine access, loading and handling capacity
+- [ ] HSE policy, environmental policy and any certifications (as downloadable documents)
+- [ ] Approved mission and vision wording
+- [ ] Leadership profiles and organisational chart
+- [ ] Additional company milestones
+- [ ] Real news articles to replace the sample content
+- [ ] Company photography of people, offices and sites
+- [ ] Social media profile URLs (`config/company.php` → `social`)
+- [ ] Legal review of the Privacy Policy, Cookie Policy and Terms & Conditions
