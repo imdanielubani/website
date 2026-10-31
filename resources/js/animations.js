@@ -13,7 +13,7 @@ const EASE = 'expo.out';
  * (via gsap.from) so nothing disappears if JavaScript fails, and every
  * animation is skipped for visitors who prefer reduced motion.
  *
- *   data-hero              hero wrapper: image settles in, heading lines rise
+ *   data-hero              hero wrapper: scroll parallax (entrance is CSS)
  *   data-split             heading revealed line by line on scroll
  *   data-reveal            fade + rise on scroll ("up" default, "fade", "clip")
  *   data-stagger           children revealed in sequence
@@ -38,27 +38,16 @@ export function initAnimations() {
     });
 }
 
+/**
+ * The hero entrance (image zoom, headline, supporting items) is pure CSS in
+ * app.css so it starts on first paint without waiting for this bundle; that
+ * keeps the headline from delaying Largest Contentful Paint. Only the
+ * scroll-linked parallax lives here.
+ */
 function hero() {
     document.querySelectorAll('[data-hero]').forEach((hero) => {
-        const tl = gsap.timeline({ defaults: { ease: EASE }, delay: document.documentElement.classList.contains('is-transitioning') ? 0.45 : 0.1 });
         const media = hero.querySelector('[data-hero-media]');
-        const title = hero.querySelector('[data-hero-title]');
-        const items = hero.querySelectorAll('[data-hero-item]');
 
-        if (media) {
-            tl.from(media, { scale: 1.14, duration: 2.4, ease: 'power3.out' }, 0);
-        }
-
-        if (title) {
-            const split = SplitText.create(title, { type: 'lines', linesClass: 'split-line', mask: 'lines' });
-            tl.from(split.lines, { yPercent: 110, duration: 1.4, stagger: 0.09 }, 0.2);
-        }
-
-        if (items.length) {
-            tl.from(items, { y: 28, autoAlpha: 0, duration: 1.2, stagger: 0.08 }, 0.55);
-        }
-
-        // Gentle parallax on the hero image as the page scrolls away.
         if (media) {
             gsap.to(media, {
                 yPercent: 12,
@@ -71,7 +60,7 @@ function hero() {
 
 function splitHeadings() {
     document.querySelectorAll('[data-split]').forEach((el) => {
-        const split = SplitText.create(el, { type: 'lines', linesClass: 'split-line', mask: 'lines' });
+        const split = SplitText.create(el, { type: 'lines', linesClass: 'split-line', mask: 'lines', aria: 'none' });
 
         gsap.from(split.lines, {
             yPercent: 105,

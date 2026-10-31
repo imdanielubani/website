@@ -77,6 +77,11 @@
         })();
     </script>
 
+    {{-- Fetch the two main typefaces in parallel with the stylesheet so headings render in the brand font sooner. --}}
+    @foreach (['manrope', 'inter'] as $font)
+        <link rel="preload" href="{{ \Illuminate\Support\Facades\Vite::asset("node_modules/@fontsource-variable/{$font}/files/{$font}-latin-wght-normal.woff2") }}" as="font" type="font/woff2" crossorigin>
+    @endforeach
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <x-partials.schema :breadcrumbs="$breadcrumbs" :extra="$schema" />

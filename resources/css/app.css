@@ -388,6 +388,44 @@
     transform-origin: bottom;
 }
 
+/*
+ * Hero entrance, driven by CSS so it begins on first paint. Elements are
+ * nearly (not fully) transparent at the start so browsers still treat the
+ * headline as painted for Largest Contentful Paint.
+ */
+@keyframes hero-zoom {
+    from { transform: scale(1.12); }
+}
+
+@keyframes hero-rise {
+    from { opacity: 0.01; transform: translateY(0.4em); }
+}
+
+@keyframes hero-fade-up {
+    from { opacity: 0.01; transform: translateY(1.75rem); }
+}
+
+.js [data-hero-media] > img {
+    animation: hero-zoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.js [data-hero-title] {
+    animation: hero-rise 1.3s var(--ease-out-expo) 0.15s both;
+}
+
+.js [data-hero-item] {
+    animation: hero-fade-up 1.2s var(--ease-out-expo) 0.45s both;
+}
+
+/* Wait for the page-transition curtain to lift. */
+.is-transitioning [data-hero-title] {
+    animation-delay: 0.6s;
+}
+
+.is-transitioning [data-hero-item] {
+    animation-delay: 0.85s;
+}
+
 /* Set by an inline head script when arriving from an internal link */
 .is-transitioning .page-curtain {
     transform: scaleY(1);
@@ -416,5 +454,11 @@
 
     .page-curtain {
         display: none;
+    }
+
+    [data-hero-media] > img,
+    [data-hero-title],
+    [data-hero-item] {
+        animation: none !important;
     }
 }
