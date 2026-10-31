@@ -49,19 +49,19 @@
             <dl class="grid grid-cols-2 gap-px border-t border-white/15 pt-6 text-sm md:grid-cols-4" data-hero-item>
                 <div class="pr-4 pb-4 md:pb-0">
                     <dt class="text-white/50">Established</dt>
-                    <dd class="mt-1 font-display text-2xl font-semibold tracking-[-0.03em]"><span data-count="{{ config('company.founded_year') }}" data-count-from="1990">{{ config('company.founded_year') }}</span></dd>
+                    <dd class="mt-1 font-display text-xl font-semibold sm:text-2xl tracking-[-0.03em]"><span data-count="{{ config('company.founded_year') }}" data-count-from="1990">{{ config('company.founded_year') }}</span></dd>
                 </div>
                 <div class="pr-4 pb-4 md:pb-0">
                     <dt class="text-white/50">Headquarters</dt>
-                    <dd class="mt-1 font-display text-2xl font-semibold tracking-[-0.03em]">Tirana</dd>
+                    <dd class="mt-1 font-display text-xl font-semibold sm:text-2xl tracking-[-0.03em]">Tirana</dd>
                 </div>
                 <div class="pr-4">
                     <dt class="text-white/50">Registered locations</dt>
-                    <dd class="mt-1 font-display text-2xl font-semibold tracking-[-0.03em]">Tirana &middot; Fier &middot; Durrës</dd>
+                    <dd class="mt-1 font-display text-xl font-semibold sm:text-2xl tracking-[-0.03em]">Tirana &middot; Fier &middot; Durrës</dd>
                 </div>
                 <div>
                     <dt class="text-white/50">Licensed activity</dt>
-                    <dd class="mt-1 font-display text-2xl font-semibold tracking-[-0.03em]">Wholesale trade</dd>
+                    <dd class="mt-1 font-display text-xl font-semibold sm:text-2xl tracking-[-0.03em]">Wholesale trade</dd>
                 </div>
             </dl>
         </div>

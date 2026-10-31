@@ -6,14 +6,14 @@
 <x-layouts.app
     title="Contact Us"
     description="Contact AL.GLOBAL OIL SH.A in Tirana, Albania. Telephone, registered address and inquiry form for customers, suppliers, careers and general questions."
-    image="office-evening"
+    image="office-sky"
     :breadcrumbs="[['name' => 'Contact']]"
 >
     <x-sections.page-hero
         eyebrow="Contact Us"
         title="Let’s talk energy"
         lead="Reach our team in Tirana by phone or send us a message. Choose the inquiry type that fits and we will direct it to the right people."
-        image="office-evening"
+        image="office-sky"
         size="md"
         :breadcrumbs="[['name' => 'Contact']]"
     />
@@ -142,7 +142,7 @@
                     ></iframe>
                 </template>
                 <div x-show="!load" class="absolute inset-0">
-                    <x-img key="office-sky" sizes="(min-width: 1024px) 66vw, 100vw" alt="" class="opacity-50" />
+                    <x-img key="office-evening" sizes="(min-width: 1024px) 66vw, 100vw" alt="" class="opacity-50" />
                     <div class="absolute inset-0 grid place-items-center p-6 text-center">
                         <div class="max-w-sm bg-ink/85 p-7 text-white backdrop-blur-md">
                             <p class="font-semibold">Interactive map</p>

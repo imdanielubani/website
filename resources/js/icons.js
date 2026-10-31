@@ -1,7 +1,6 @@
 import {
     createIcons,
     ArrowUpRight,
-    Award,
     BadgeCheck,
     Briefcase,
     Building2,
@@ -15,7 +14,6 @@ import {
     Flame,
     Fuel,
     Gauge,
-    Globe2,
     Handshake,
     HardHat,
     HeartPulse,
@@ -35,7 +33,6 @@ import {
     Target,
     TrendingUp,
     Truck,
-    Upload,
     Users,
     Warehouse,
     Waves,
@@ -50,7 +47,6 @@ export function renderIcons() {
     createIcons({
         icons: {
             ArrowUpRight,
-            Award,
             BadgeCheck,
             Briefcase,
             Building2,
@@ -64,7 +60,6 @@ export function renderIcons() {
             Flame,
             Fuel,
             Gauge,
-            Globe2,
             Handshake,
             HardHat,
             HeartPulse,
@@ -84,7 +79,6 @@ export function renderIcons() {
             Target,
             TrendingUp,
             Truck,
-            Upload,
             Users,
             Warehouse,
             Waves,
