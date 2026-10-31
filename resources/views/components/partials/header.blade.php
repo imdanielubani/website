@@ -181,6 +181,10 @@
                             <li><a href="tel:{{ preg_replace('/\s+/', '', $phone) }}" class="hover:text-accent">{{ $phone }}</a></li>
                         @endforeach
                     </ul>
+                    @if (config('company.contact.email'))
+                        <p class="eyebrow mt-8 text-white/50">Email</p>
+                        <a href="mailto:{{ config('company.contact.email') }}" class="mt-3 block text-lg break-all hover:text-accent">{{ config('company.contact.email') }}</a>
+                    @endif
                 </div>
                 <div>
                     <p class="eyebrow text-white/50">Headquarters</p>

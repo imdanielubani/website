@@ -53,6 +53,21 @@ class PagesTest extends TestCase
         $this->assertStringContainsString('Disallow: /', file_get_contents(public_path('robots.txt')));
     }
 
+    public function test_company_email_is_published(): void
+    {
+        $email = config('company.contact.email');
+
+        $this->assertSame('info@alglobaloilsha.com', $email);
+
+        $this->get('/contact')
+            ->assertSee("mailto:{$email}", false)
+            ->assertSee('"email":"' . $email . '"', false)
+            ->assertDontSee('Official email to be confirmed');
+
+        $this->get('/business-inquiry')->assertSee("mailto:{$email}", false);
+        $this->get('/')->assertSee("mailto:{$email}", false);
+    }
+
     public function test_unknown_page_uses_custom_404(): void
     {
         $this->get('/this-page-does-not-exist')

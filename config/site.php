@@ -25,6 +25,6 @@ return [
     |
     */
 
-    'inquiry_recipient' => env('INQUIRY_RECIPIENT', 'info@example.com'),
+    'inquiry_recipient' => env('INQUIRY_RECIPIENT', 'info@alglobaloilsha.com'),
 
 ];

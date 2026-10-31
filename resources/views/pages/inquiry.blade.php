@@ -44,6 +44,12 @@
                                 @endforeach
                             </div>
                         </div>
+                        @if (config('company.contact.email'))
+                            <div class="mt-5 flex gap-4" data-reveal>
+                                <x-icon name="mail" class="mt-0.5 size-5 text-olive" />
+                                <a href="mailto:{{ config('company.contact.email') }}" class="link-line block w-fit font-normal break-all text-ink-2">{{ config('company.contact.email') }}</a>
+                            </div>
+                        @endif
                     </div>
                 </aside>
 

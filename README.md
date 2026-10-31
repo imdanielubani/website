@@ -64,8 +64,8 @@ On XAMPP/Apache, point the virtual host's document root at the `public/` directo
 | `SESSION_DRIVER`, `CACHE_STORE` | `file` (no database needed). |
 | `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_SCHEME` | Outgoing mail for form notifications. With `MAIL_MAILER=log`, emails are written to `storage/logs/laravel.log`. |
 | `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` | Sender of form notification emails. |
-| `INQUIRY_RECIPIENT` | Inbox that receives contact and business inquiries. |
-| `COMPANY_EMAIL` | Public email shown on the site. Leave empty until confirmed; a contact-form link is shown instead. |
+| `INQUIRY_RECIPIENT` | Inbox that receives contact and business inquiries. Default `info@alglobaloilsha.com`. |
+| `COMPANY_EMAIL` | Public email shown on the site, in structured data and on the letterhead. Default `info@alglobaloilsha.com`. |
 | `SITE_NOINDEX` | `true` (default) keeps search engines out. |
 
 Never commit `.env`; it contains secrets.
@@ -235,11 +235,11 @@ The following facts come from the company's public entry in the Albanian busines
 - Registered object of activity, with processing added on 31 January 2018
 - Registered seat in Tirana and business locations in Fier (Drizë) and Durrës (Porto Romano hydrocarbons terminal)
 - Telephone numbers +355 68 204 4754 and +355 69 204 4754
+- Email info@alglobaloilsha.com (supplied by the company)
 - Licence VIII.1.A and environmental permits III.1.B and III.1.C
 
 Please confirm or supply:
 
-- [ ] Official public email address (`COMPANY_EMAIL`) and the inbox for form submissions (`INQUIRY_RECIPIENT`)
 - [ ] Current validity of the listed licence and permits
 - [ ] Current product range, grades and specifications
 - [ ] Processing operations: facility, operating status, capacity and products

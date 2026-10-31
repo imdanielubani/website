@@ -40,8 +40,8 @@ return [
     'contact' => [
         // Verified: phone numbers listed on the public register
         'phones' => ['+355 68 204 4754', '+355 69 204 4754'],
-        // To be confirmed: replace with the company's official address
-        'email' => env('COMPANY_EMAIL'),
+        // Official company email
+        'email' => env('COMPANY_EMAIL', 'info@alglobaloilsha.com'),
         'hours' => null,
     ],
 
