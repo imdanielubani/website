@@ -16,13 +16,13 @@
     <section class="section bg-paper">
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
-                <p class="eyebrow lg:col-span-3" data-reveal>Introduction</p>
+                <p class="eyebrow lg:col-span-3" data-reveal>{{ __('Introduction') }}</p>
                 <div class="lg:col-span-9">
                     <p class="font-display text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[1.18] font-medium tracking-[-0.03em]" data-split>
-                        We believe a credible approach to sustainability is built on honest, practical actions rather than broad promises.
+                        {{ __('We believe a credible approach to sustainability is built on honest, practical actions rather than broad promises.') }}
                     </p>
                     <p class="mt-10 max-w-2xl leading-relaxed text-stone" data-reveal>
-                        This page sets out the principles that guide us. Where we publish targets or performance data in future, they will be measured, verified and reported transparently.
+                        {{ __('This page sets out the principles that guide us. Where we publish targets or performance data in future, they will be measured, verified and reported transparently.') }}
                     </p>
                 </div>
             </div>
@@ -38,9 +38,9 @@
         <section class="pb-20 sm:pb-28 lg:pb-36 bg-paper">
             <div class="container-site">
                 <x-sections.split :image="$pillar['image']" :reverse="$loop->even" ratio="aspect-[4/3] lg:aspect-[5/4]">
-                    <p class="eyebrow" data-reveal>{{ $pillar['eyebrow'] }}</p>
-                    <h2 class="text-h2 mt-6" data-split>{{ $pillar['title'] }}</h2>
-                    <p class="lead mt-6" data-reveal>{{ $pillar['text'] }}</p>
+                    <p class="eyebrow" data-reveal>{{ t($pillar['eyebrow']) }}</p>
+                    <h2 class="text-h2 mt-6" data-split>{{ t($pillar['title']) }}</h2>
+                    <p class="lead mt-6" data-reveal>{{ t($pillar['text']) }}</p>
                 </x-sections.split>
             </div>
         </section>
@@ -64,8 +64,8 @@
                 ] as $i => [$title, $text])
                     <li class="bg-ink p-7 sm:p-8">
                         <span class="index-num text-accent">0{{ $i + 1 }}</span>
-                        <h3 class="mt-10 font-display text-2xl font-semibold tracking-[-0.03em]">{{ $title }}</h3>
-                        <p class="mt-2 text-white/60">{{ $text }}</p>
+                        <h3 class="mt-10 font-display text-2xl font-semibold tracking-[-0.03em]">{{ t($title) }}</h3>
+                        <p class="mt-2 text-white/60">{{ t($text) }}</p>
                     </li>
                 @endforeach
             </ol>
@@ -77,9 +77,9 @@
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
                 <div class="lg:col-span-5">
-                    <p class="eyebrow" data-reveal>Future commitments</p>
-                    <h2 class="text-h2 mt-6" data-split>What we commit to</h2>
-                    <p class="lead mt-6" data-reveal>Our commitments are deliberately practical. Any quantified targets will be published only once they are defined and can be measured.</p>
+                    <p class="eyebrow" data-reveal>{{ __('Future commitments') }}</p>
+                    <h2 class="text-h2 mt-6" data-split>{{ __('What we commit to') }}</h2>
+                    <p class="lead mt-6" data-reveal>{{ __('Our commitments are deliberately practical. Any quantified targets will be published only once they are defined and can be measured.') }}</p>
                 </div>
                 <ul class="divide-y divide-line border-y border-line lg:col-span-7" data-stagger>
                     @foreach ([
@@ -90,7 +90,7 @@
                     ] as [$icon, $text])
                         <li class="flex gap-5 py-6">
                             <x-icon :name="$icon" class="mt-0.5 size-6 text-olive" />
-                            <p class="text-lg text-ink-2">{{ $text }}</p>
+                            <p class="text-lg text-ink-2">{{ t($text) }}</p>
                         </li>
                     @endforeach
                 </ul>

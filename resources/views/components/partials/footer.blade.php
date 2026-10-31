@@ -8,9 +8,9 @@
     <div class="container-site pt-20 pb-10 sm:pt-28">
         <div class="grid gap-12 border-b border-white/10 pb-16 lg:grid-cols-12">
             <div class="lg:col-span-5">
-                <x-logo tone="dark" :href="route('home')" />
+                <x-logo tone="dark" :href="lroute('home')" />
                 <p class="mt-8 max-w-md leading-relaxed text-white/60">
-                    An Albanian petroleum company established in {{ config('company.founded_year') }}, registered for the wholesale import, export and processing of hydrocarbons, fuels, gas and their by-products.
+                    {{ __('An Albanian petroleum company established in :year, registered for the wholesale import, export and processing of hydrocarbons, fuels, gas and their by-products.', ['year' => config('company.founded_year')]) }}
                 </p>
                 <dl class="mt-8 grid max-w-md grid-cols-2 gap-6 text-sm">
                     <div>
@@ -18,39 +18,39 @@
                         <dd class="mt-1 font-medium tracking-wide">{{ config('company.nuis') }}</dd>
                     </div>
                     <div>
-                        <dt class="text-white/40">Established</dt>
-                        <dd class="mt-1 font-medium">{{ \Illuminate\Support\Carbon::parse(config('company.founded'))->format('j F Y') }}</dd>
+                        <dt class="text-white/40">{{ __('Established') }}</dt>
+                        <dd class="mt-1 font-medium">{{ \Illuminate\Support\Carbon::parse(config('company.founded'))->translatedFormat('j F Y') }}</dd>
                     </div>
                 </dl>
             </div>
 
-            <nav aria-label="Footer" class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+            <nav aria-label="{{ __('Footer') }}" class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
                 <div>
-                    <p class="eyebrow text-white/50">Company</p>
+                    <p class="eyebrow text-white/50">{{ __('Company') }}</p>
                     <ul class="mt-6 space-y-3 text-[0.9375rem] text-white/75">
-                        <li><a class="link-line font-normal hover:text-white" href="{{ route('about') }}">About Us</a></li>
-                        <li><a class="link-line font-normal hover:text-white" href="{{ route('careers') }}">Careers</a></li>
-                        <li><a class="link-line font-normal hover:text-white" href="{{ route('news.index') }}">News &amp; Insights</a></li>
-                        <li><a class="link-line font-normal hover:text-white" href="{{ route('contact') }}">Contact</a></li>
-                        <li><a class="link-line font-normal hover:text-white" href="{{ route('inquiry') }}">Business Inquiry</a></li>
+                        <li><a class="link-line font-normal hover:text-white" href="{{ lroute('about') }}">{{ __('About Us') }}</a></li>
+                        <li><a class="link-line font-normal hover:text-white" href="{{ lroute('careers') }}">{{ __('Careers') }}</a></li>
+                        <li><a class="link-line font-normal hover:text-white" href="{{ lroute('news.index') }}">{{ __('News & Insights') }}</a></li>
+                        <li><a class="link-line font-normal hover:text-white" href="{{ lroute('contact') }}">{{ __('Contact') }}</a></li>
+                        <li><a class="link-line font-normal hover:text-white" href="{{ lroute('inquiry') }}">{{ __('Business Inquiry') }}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <p class="eyebrow text-white/50">Business</p>
+                    <p class="eyebrow text-white/50">{{ __('Business') }}</p>
                     <ul class="mt-6 space-y-3 text-[0.9375rem] text-white/75">
                         @foreach ($business as $link)
-                            <li><a class="link-line font-normal hover:text-white" href="{{ route($link['route']) }}">{{ $link['label'] }}</a></li>
+                            <li><a class="link-line font-normal hover:text-white" href="{{ lroute($link['route']) }}">{{ __($link['label']) }}</a></li>
                         @endforeach
                     </ul>
-                    <p class="eyebrow mt-10 text-white/50">Responsibility</p>
+                    <p class="eyebrow mt-10 text-white/50">{{ __('Responsibility') }}</p>
                     <ul class="mt-6 space-y-3 text-[0.9375rem] text-white/75">
                         @foreach ($responsibility as $link)
-                            <li><a class="link-line font-normal hover:text-white" href="{{ route($link['route']) }}">{{ $link['label'] }}</a></li>
+                            <li><a class="link-line font-normal hover:text-white" href="{{ lroute($link['route']) }}">{{ __($link['label']) }}</a></li>
                         @endforeach
                     </ul>
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <p class="eyebrow text-white/50">Contact</p>
+                    <p class="eyebrow text-white/50">{{ __('Contact') }}</p>
                     <address class="mt-6 space-y-4 text-[0.9375rem] not-italic text-white/75">
                         <p>
                             @foreach (config('company.locations.tirana.lines') as $line)
@@ -65,7 +65,7 @@
                         @if ($email)
                             <p><a class="link-line font-normal hover:text-white" href="mailto:{{ $email }}">{{ $email }}</a></p>
                         @else
-                            <p><a class="link-line font-normal hover:text-white" href="{{ route('contact') }}">Send us a message</a></p>
+                            <p><a class="link-line font-normal hover:text-white" href="{{ lroute('contact') }}">{{ __('Send us a message') }}</a></p>
                         @endif
                     </address>
                 </div>
@@ -73,15 +73,15 @@
         </div>
 
         <div class="flex flex-col gap-6 pt-8 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
-            <p>&copy; {{ now()->year }} {{ config('company.name') }}. All rights reserved.</p>
+            <p>&copy; {{ now()->year }} {{ config('company.name') }}. {{ __('All rights reserved.') }}</p>
             <ul class="flex flex-wrap gap-x-7 gap-y-2">
-                <li><a class="hover:text-white" href="{{ route('legal.privacy') }}">Privacy Policy</a></li>
-                <li><a class="hover:text-white" href="{{ route('legal.cookies') }}">Cookie Policy</a></li>
-                <li><a class="hover:text-white" href="{{ route('legal.terms') }}">Terms &amp; Conditions</a></li>
-                <li><button type="button" class="cursor-pointer hover:text-white" x-data x-on:click="$dispatch('open-cookie-settings')">Cookie Settings</button></li>
+                <li><a class="hover:text-white" href="{{ lroute('legal.privacy') }}">{{ __('Privacy Policy') }}</a></li>
+                <li><a class="hover:text-white" href="{{ lroute('legal.cookies') }}">{{ __('Cookie Policy') }}</a></li>
+                <li><a class="hover:text-white" href="{{ lroute('legal.terms') }}">{{ __('Terms & Conditions') }}</a></li>
+                <li><button type="button" class="cursor-pointer hover:text-white" x-data x-on:click="$dispatch('open-cookie-settings')">{{ __('Cookie Settings') }}</button></li>
             </ul>
             <a href="#main" class="group inline-flex items-center gap-3 text-white/70 hover:text-white" data-scroll-top>
-                Back to top
+                {{ __('Back to top') }}
                 <span class="grid size-9 place-items-center bg-white/8 transition-colors group-hover:bg-accent group-hover:text-ink" aria-hidden="true">
                     <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M4 7l4-4 4 4" /></svg>
                 </span>

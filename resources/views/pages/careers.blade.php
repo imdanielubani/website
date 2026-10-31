@@ -20,10 +20,10 @@
     <section class="section bg-paper">
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
-                <p class="eyebrow lg:col-span-3" data-reveal>Careers at AL.GLOBAL OIL</p>
+                <p class="eyebrow lg:col-span-3" data-reveal>{{ __('Careers at AL.GLOBAL OIL') }}</p>
                 <div class="lg:col-span-9">
                     <p class="font-display text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[1.18] font-medium tracking-[-0.03em]" data-split>
-                        The energy sector rewards people who are careful, curious and committed. If that sounds like you, we would like to hear from you.
+                        {{ __('The energy sector rewards people who are careful, curious and committed. If that sounds like you, we would like to hear from you.') }}
                     </p>
                 </div>
             </div>
@@ -34,9 +34,9 @@
     <section class="pb-20 sm:pb-28 lg:pb-36 bg-paper">
         <div class="container-site">
             <x-sections.split image="engineer-hardhat" ratio="aspect-[4/3] lg:aspect-[5/4]">
-                <p class="eyebrow" data-reveal>Working in the energy sector</p>
-                <h2 class="text-h2 mt-6" data-split>Meaningful work at the heart of the economy</h2>
-                <p class="lead mt-6" data-reveal>Energy powers transport, industry and everyday life. Working in petroleum trading and operations means contributing to something essential, in an environment where standards matter.</p>
+                <p class="eyebrow" data-reveal>{{ __('Working in the energy sector') }}</p>
+                <h2 class="text-h2 mt-6" data-split>{{ __('Meaningful work at the heart of the economy') }}</h2>
+                <p class="lead mt-6" data-reveal>{{ __('Energy powers transport, industry and everyday life. Working in petroleum trading and operations means contributing to something essential, in an environment where standards matter.') }}</p>
                 <ul class="mt-10 grid gap-px bg-line sm:grid-cols-2" data-stagger>
                     @foreach ([
                         ['briefcase', 'Commercial & trading'],
@@ -46,11 +46,11 @@
                     ] as [$icon, $area])
                         <li class="flex items-center gap-4 bg-paper py-5 sm:pr-6">
                             <x-icon :name="$icon" class="size-6 text-olive" />
-                            <span class="font-medium text-ink-2">{{ $area }}</span>
+                            <span class="font-medium text-ink-2">{{ t($area) }}</span>
                         </li>
                     @endforeach
                 </ul>
-                <p class="mt-4 text-sm text-stone" data-reveal>Typical areas of work in our sector.</p>
+                <p class="mt-4 text-sm text-stone" data-reveal>{{ __('Typical areas of work in our sector.') }}</p>
             </x-sections.split>
         </div>
     </section>
@@ -78,19 +78,19 @@
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
                 <div class="lg:col-span-5">
-                    <p class="eyebrow" data-reveal>Career opportunities</p>
-                    <h2 class="text-h2 mt-6" data-split>Current openings</h2>
-                    <p class="lead mt-6" data-reveal>Open positions are published here when available.</p>
+                    <p class="eyebrow" data-reveal>{{ __('Career opportunities') }}</p>
+                    <h2 class="text-h2 mt-6" data-split>{{ __('Current openings') }}</h2>
+                    <p class="lead mt-6" data-reveal>{{ __('Open positions are published here when available.') }}</p>
                 </div>
                 <div class="lg:col-span-7">
                     <div class="border border-line bg-cream p-8 sm:p-12" data-reveal>
                         <x-icon name="briefcase" class="size-8 text-olive" />
-                        <h3 class="mt-8 font-display text-2xl font-semibold tracking-[-0.03em]">No vacancies are advertised at the moment</h3>
+                        <h3 class="mt-8 font-display text-2xl font-semibold tracking-[-0.03em]">{{ __('No vacancies are advertised at the moment') }}</h3>
                         <p class="mt-4 leading-relaxed text-stone">
-                            We are always interested in hearing from talented people. Send us a general application and we will keep your details on file for future opportunities that match your experience.
+                            {{ __('We are always interested in hearing from talented people. Send us a general application and we will keep your details on file for future opportunities that match your experience.') }}
                         </p>
                         <div class="mt-8">
-                            <x-buttons.primary :href="route('contact', ['type' => 'careers']) . '#contact-form'" variant="dark">Send a General Application</x-buttons.primary>
+                            <x-buttons.primary :href="lroute('contact', ['type' => 'careers']) . '#contact-form'" variant="dark">{{ __('Send a General Application') }}</x-buttons.primary>
                         </div>
                     </div>
                 </div>
@@ -111,17 +111,18 @@
                 @foreach ([
                     ['Choose “Careers inquiry”', 'Open the contact form and select the Careers inquiry type.'],
                     ['Introduce yourself', 'Tell us about your experience, the area you are interested in and your availability.'],
-                    ['Share your CV', $email ? 'Email your CV (PDF) to ' . $email . ', quoting your name in the subject line.' : 'Our team will reply with instructions for sending your CV securely.'],
+                    ['Share your CV', $email ? __('Email your CV (PDF) to :email, quoting your name in the subject line.', ['email' => $email]) : __('Our team will reply with instructions for sending your CV securely.')],
                 ] as $i => [$title, $text])
                     <li class="bg-paper p-8 sm:p-10">
                         <span class="index-num text-olive">Step 0{{ $i + 1 }}</span>
-                        <h3 class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ $title }}</h3>
-                        <p class="mt-3 leading-relaxed text-stone">{{ $text }}</p>
+                        <h3 class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ t($title) }}</h3>
+                        <p class="mt-3 leading-relaxed text-stone">{{ t($text) }}</p>
                     </li>
                 @endforeach
             </ol>
             <p class="mt-8 max-w-3xl text-sm leading-relaxed text-stone" data-reveal>
-                We process applicant data only to assess your application, as described in our <a href="{{ route('legal.privacy') }}" class="font-medium text-ink-2 underline underline-offset-4">Privacy Policy</a>. Please do not send identity documents or sensitive personal information at this stage.
+                {{-- Translation strings are trusted; the link text is escaped. --}}
+                {!! __('We process applicant data only to assess your application, as described in our :link. Please do not send identity documents or sensitive personal information at this stage.', ['link' => '<a href="' . e(lroute('legal.privacy')) . '" class="font-medium text-ink-2 underline underline-offset-4">' . e(__('Privacy Policy (link)')) . '</a>']) !!}
             </p>
         </div>
     </section>

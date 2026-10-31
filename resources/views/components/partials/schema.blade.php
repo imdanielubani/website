@@ -16,7 +16,8 @@
             'logo' => asset('images/brand/logo-mark.svg'),
             'foundingDate' => config('company.founded'),
             'taxID' => config('company.nuis'),
-            'description' => config('company.registered_activity'),
+            'description' => __(config('company.registered_activity')),
+            'inLanguage' => app()->getLocale(),
             'telephone' => config('company.contact.phones')[0] ?? null,
             'email' => config('company.contact.email'),
             'address' => [
@@ -30,7 +31,7 @@
     ];
 
     if (count($breadcrumbs)) {
-        $items = [['name' => 'Home', 'url' => route('home')], ...$breadcrumbs];
+        $items = [['name' => __('Home'), 'url' => lroute('home')], ...$breadcrumbs];
         $graph[] = [
             '@type' => 'BreadcrumbList',
             'itemListElement' => collect($items)->values()->map(fn ($crumb, $i) => [

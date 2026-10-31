@@ -63,10 +63,10 @@
     />
 
     {{-- In-page index --}}
-    <nav aria-label="On this page" class="sticky top-0 z-30 hidden border-b border-line bg-paper/90 backdrop-blur-lg md:block">
+    <nav aria-label="{{ __('On this page') }}" class="sticky top-0 z-30 hidden border-b border-line bg-paper/90 backdrop-blur-lg md:block">
         <div class="container-site flex gap-8 overflow-x-auto py-5 text-sm font-medium text-stone">
             @foreach ($services as $service)
-                <a href="#{{ $service['id'] }}" class="shrink-0 hover:text-ink-2">{{ $service['title'] }}</a>
+                <a href="#{{ $service['id'] }}" class="shrink-0 hover:text-ink-2">{{ t($service['title']) }}</a>
             @endforeach
         </div>
     </nav>
@@ -75,9 +75,9 @@
         <div class="container-site">
             <div class="flex flex-col gap-6 border-b border-line pb-12 lg:flex-row lg:items-end lg:justify-between">
                 <p class="max-w-2xl text-lead text-stone" data-reveal>
-                    The services below reflect our registered object of activity and wholesale trading licence. We do not publish a fixed product catalogue: grades, specifications, quantities and availability are confirmed individually for every inquiry.
+                    {{ __('The services below reflect our registered object of activity and wholesale trading licence. We do not publish a fixed product catalogue: grades, specifications, quantities and availability are confirmed individually for every inquiry.') }}
                 </p>
-                <div data-reveal><x-confirm>Detailed product catalogue to be confirmed by the company</x-confirm></div>
+                <div data-reveal><x-confirm>{{ __('Detailed product catalogue to be confirmed by the company') }}</x-confirm></div>
             </div>
         </div>
     </section>
@@ -86,21 +86,21 @@
         <section id="{{ $service['id'] }}" class="pb-20 sm:pb-28 lg:pb-36 {{ $loop->first ? 'bg-paper' : 'bg-paper' }}">
             <div class="container-site">
                 <x-sections.split :image="$service['image']" :reverse="$loop->even" ratio="aspect-[4/3] lg:aspect-[5/4]">
-                    <p class="eyebrow" data-reveal>{{ $service['eyebrow'] }}</p>
-                    <h2 class="text-h2 mt-6" data-split>{{ $service['title'] }}</h2>
-                    <p class="lead mt-6" data-reveal>{{ $service['text'] }}</p>
+                    <p class="eyebrow" data-reveal>{{ t($service['eyebrow']) }}</p>
+                    <h2 class="text-h2 mt-6" data-split>{{ t($service['title']) }}</h2>
+                    <p class="lead mt-6" data-reveal>{{ t($service['text']) }}</p>
                     <ul class="mt-10 space-y-4" data-stagger>
                         @foreach ($service['points'] as $point)
                             <li class="flex gap-4 border-b border-line pb-4">
                                 <span class="mt-2 size-2 shrink-0 bg-accent-strong" aria-hidden="true"></span>
-                                <span class="text-ink-2">{{ $point }}</span>
+                                <span class="text-ink-2">{{ t($point) }}</span>
                             </li>
                         @endforeach
                     </ul>
                     <div class="mt-10 flex flex-wrap gap-3" data-reveal>
-                        <x-buttons.primary :href="route('inquiry', ['type' => 'purchase'])" variant="dark">Make an Inquiry</x-buttons.primary>
+                        <x-buttons.primary :href="lroute('inquiry', ['type' => 'purchase'])" variant="dark">{{ __('Make an Inquiry') }}</x-buttons.primary>
                         @if ($service['link'])
-                            <x-buttons.primary :href="route($service['link'])" variant="outline">Learn More</x-buttons.primary>
+                            <x-buttons.primary :href="lroute($service['link'])" variant="outline">{{ __('Learn More') }}</x-buttons.primary>
                         @endif
                     </div>
                 </x-sections.split>

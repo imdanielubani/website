@@ -1,14 +1,14 @@
 @php
     $categoryName = $activeCategory ? $categories[$activeCategory] : null;
     $crumbs = $activeCategory
-        ? [['name' => 'News', 'url' => route('news.index')], ['name' => $categoryName]]
+        ? [['name' => 'News', 'url' => lroute('news.index')], ['name' => $categoryName]]
         : [['name' => 'News']];
 @endphp
 
 <x-layouts.app
-    :title="$categoryName ? $categoryName . ' | News & Insights' : 'News & Insights'"
+    :title="$categoryName ? t($categoryName) . ' | ' . __('News & Insights') : __('News & Insights')"
     :description="$categoryName
-        ? $categoryName . ' articles from AL.GLOBAL OIL SH.A.'
+        ? __(':category articles from AL.GLOBAL OIL SH.A.', ['category' => t($categoryName)])
         : 'News, insights and company updates from AL.GLOBAL OIL SH.A, an Albanian petroleum and hydrocarbons company.'"
     image="ship-sea"
     :breadcrumbs="$crumbs"
@@ -16,7 +16,7 @@
 >
     <x-sections.page-hero
         eyebrow="News & Insights"
-        :title="$categoryName ?? 'Perspectives on energy and our business'"
+        :title="$categoryName ? t($categoryName) : __('Perspectives on energy and our business')"
         lead="Company updates, industry context and practical insights from AL.GLOBAL OIL."
         image="ship-sea"
         size="md"
@@ -27,14 +27,14 @@
         <div class="container-site">
 
             {{-- Categories --}}
-            <nav aria-label="Article categories" class="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+            <nav aria-label="{{ __('Article categories') }}" class="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
                 <ul class="flex w-max gap-2 sm:w-auto sm:flex-wrap">
                     <li>
-                        <a href="{{ route('news.index') }}" class="inline-flex min-h-11 items-center px-5 text-sm font-medium ring-1 ring-inset transition-colors {{ $activeCategory ? 'ring-ink-2/15 hover:ring-ink-2/40' : 'bg-ink-2 text-white ring-ink-2' }}" @unless ($activeCategory) aria-current="page" @endunless>All</a>
+                        <a href="{{ lroute('news.index') }}" class="inline-flex min-h-11 items-center px-5 text-sm font-medium ring-1 ring-inset transition-colors {{ $activeCategory ? 'ring-ink-2/15 hover:ring-ink-2/40' : 'bg-ink-2 text-white ring-ink-2' }}" @unless ($activeCategory) aria-current="page" @endunless>{{ __('All') }}</a>
                     </li>
                     @foreach ($categories as $slug => $label)
                         <li>
-                            <a href="{{ route('news.category', $slug) }}" class="inline-flex min-h-11 items-center px-5 text-sm font-medium ring-1 ring-inset transition-colors {{ $activeCategory === $slug ? 'bg-ink-2 text-white ring-ink-2' : 'ring-ink-2/15 hover:ring-ink-2/40' }}" @if ($activeCategory === $slug) aria-current="page" @endif>{{ $label }}</a>
+                            <a href="{{ lroute('news.category', $slug) }}" class="inline-flex min-h-11 items-center px-5 text-sm font-medium ring-1 ring-inset transition-colors {{ $activeCategory === $slug ? 'bg-ink-2 text-white ring-ink-2' : 'ring-ink-2/15 hover:ring-ink-2/40' }}" @if ($activeCategory === $slug) aria-current="page" @endif>{{ t($label) }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -48,11 +48,11 @@
                     </div>
                     <div class="on-dark flex flex-col justify-between gap-10 p-8 sm:p-12 lg:col-span-5">
                         <div>
-                            <p class="eyebrow text-white/70">Featured</p>
+                            <p class="eyebrow text-white/70">{{ __('Featured') }}</p>
                             <div class="mt-8 flex items-center gap-3 text-sm text-white/60">
-                                <a href="{{ route('news.category', $featured->categorySlug()) }}" class="relative z-10 font-semibold text-accent">{{ $featured->category }}</a>
-                                <span aria-hidden="true">&middot;</span>
-                                <time datetime="{{ $featured->publishedAt->toDateString() }}">{{ $featured->publishedAt->format('j F Y') }}</time>
+                                <a href="{{ lroute('news.category', $featured->categorySlug()) }}" class="relative z-10 font-semibold text-accent">{{ t($featured->category) }}</a>
+                                <span aria-hidden="true">{{ __('·') }}</span>
+                                <time datetime="{{ $featured->publishedAt->toDateString() }}">{{ $featured->publishedAt->translatedFormat('j F Y') }}</time>
                             </div>
                             <h2 class="mt-4 font-display text-[clamp(1.75rem,1.3rem+1.6vw,2.75rem)] leading-tight font-semibold tracking-[-0.03em]">
                                 <a href="{{ $featured->url() }}" class="after:absolute after:inset-0">{{ $featured->title }}</a>
@@ -60,7 +60,7 @@
                             <p class="mt-5 leading-relaxed text-white/65">{{ $featured->excerpt }}</p>
                         </div>
                         <span class="inline-flex items-center gap-3 text-sm font-semibold text-accent">
-                            Read article
+                            {{ __('Read article') }}
                             <x-icon name="arrow-up-right" class="size-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                         </span>
                     </div>
@@ -75,7 +75,7 @@
                     @endforeach
                 </div>
             @elseif (! $featured)
-                <p class="mt-16 text-lead text-stone">No articles have been published yet.</p>
+                <p class="mt-16 text-lead text-stone">{{ __('No articles have been published yet.') }}</p>
             @endif
 
             @if ($articles->hasPages())
@@ -86,7 +86,7 @@
 
             @if ($articles->getCollection()->contains->isSample || $featured?->isSample)
                 <div class="mt-16">
-                    <x-confirm>Sample articles shown for layout purposes. Replace with company news before launch</x-confirm>
+                    <x-confirm>{{ __('Sample articles shown for layout purposes. Replace with company news before launch') }}</x-confirm>
                 </div>
             @endif
         </div>

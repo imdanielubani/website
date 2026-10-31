@@ -34,11 +34,12 @@ class InquiryController extends Controller
             'Product requirements' => $data['product_requirements'] ?? null,
             'Estimated quantity' => $data['estimated_quantity'] ?? null,
             'Message' => $data['message'],
+            'Language' => config('site.locales.' . app()->getLocale() . '.name'),
             'Submitted' => now()->toDayDateTimeString(),
         ]);
 
         return redirect()
-            ->to(route('inquiry') . '#inquiry-form')
+            ->to(lroute('inquiry') . '#inquiry-form')
             ->with('status', 'Thank you. Your business inquiry has been received and our commercial team will respond shortly.');
     }
 }

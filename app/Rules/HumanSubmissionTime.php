@@ -25,7 +25,7 @@ class HumanSubmissionTime implements ValidationRule
         try {
             $renderedAt = (int) Crypt::decryptString((string) $value);
         } catch (DecryptException) {
-            $fail('Your session could not be verified. Please reload the page and try again.');
+            $fail(__('Your session could not be verified. Please reload the page and try again.'));
 
             return;
         }
@@ -33,9 +33,9 @@ class HumanSubmissionTime implements ValidationRule
         $elapsed = time() - $renderedAt;
 
         if ($elapsed < $this->minSeconds) {
-            $fail('The form was submitted too quickly. Please take a moment and try again.');
+            $fail(__('The form was submitted too quickly. Please take a moment and try again.'));
         } elseif ($elapsed > $this->maxSeconds) {
-            $fail('This form has expired. Please reload the page and try again.');
+            $fail(__('This form has expired. Please reload the page and try again.'));
         }
     }
 }

@@ -26,8 +26,16 @@ final class NewsArticle
         public readonly bool $isSample = false,
     ) {}
 
-    public static function fromArray(array $data): self
+    /**
+     * Build an article in the given language. Translated fields are read
+     * from $data[$locale] (title, excerpt, content, seo_title,
+     * seo_description) and fall back to the default-language values.
+     */
+    public static function fromArray(array $data, ?string $locale = null): self
     {
+        $locale ??= app()->getLocale();
+        $data = array_merge($data, $data[$locale] ?? []);
+
         return new self(
             title: $data['title'],
             slug: $data['slug'] ?? Str::slug($data['title']),
@@ -64,7 +72,7 @@ final class NewsArticle
 
     public function url(): string
     {
-        return route('news.show', $this->slug);
+        return lroute('news.show', $this->slug);
     }
 
     public function readingMinutes(): int

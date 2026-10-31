@@ -12,8 +12,8 @@
                     <x-icon :name="$item['icon']" class="size-[1.35rem]" />
                 </span>
             @endisset
-            <h3 class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ $item['title'] }}</h3>
-            <p class="mt-3 leading-relaxed {{ $tone === 'dark' ? 'text-white/60' : 'text-stone' }}">{{ $item['text'] }}</p>
+            <h3 class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ t($item['title']) }}</h3>
+            <p class="mt-3 leading-relaxed {{ $tone === 'dark' ? 'text-white/60' : 'text-stone' }}">{{ t($item['text']) }}</p>
         </li>
     @endforeach
 </ul>

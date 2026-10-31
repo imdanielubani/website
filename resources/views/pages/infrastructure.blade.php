@@ -34,13 +34,13 @@
     <section class="section bg-paper">
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
-                <p class="eyebrow lg:col-span-3" data-reveal>Infrastructure</p>
+                <p class="eyebrow lg:col-span-3" data-reveal>{{ __('Infrastructure') }}</p>
                 <div class="lg:col-span-9">
                     <p class="font-display text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[1.18] font-medium tracking-[-0.03em]" data-split>
-                        Our registered seat is in Tirana, with further registered places of business in Fier and at the Porto Romano hydrocarbons terminal in Durrës.
+                        {{ __('Our registered seat is in Tirana, with further registered places of business in Fier and at the Porto Romano hydrocarbons terminal in Durrës.') }}
                     </p>
                     <p class="mt-10 max-w-2xl leading-relaxed text-stone" data-reveal>
-                        The addresses below are as recorded in the Albanian business register. Facility specifications such as storage capacity, tank numbers and handling volumes are not published here and are shared directly once confirmed.
+                        {{ __('The addresses below are as recorded in the Albanian business register. Facility specifications such as storage capacity, tank numbers and handling volumes are not published here and are shared directly once confirmed.') }}
                     </p>
                 </div>
             </div>
@@ -60,19 +60,19 @@
                     </div>
                     <div class="flex flex-col justify-between p-8 sm:p-12 lg:col-span-5 lg:p-14">
                         <div>
-                            <p class="text-xs font-semibold tracking-[0.16em] text-olive uppercase" data-reveal>{{ $location['label'] }}</p>
-                            <h2 class="text-h3 mt-4" data-split>{{ $details[$key]['title'] }}</h2>
-                            <p class="mt-5 leading-relaxed text-stone" data-reveal>{{ $details[$key]['text'] }}</p>
+                            <p class="text-xs font-semibold tracking-[0.16em] text-olive uppercase" data-reveal>{{ t($location['label']) }}</p>
+                            <h2 class="text-h3 mt-4" data-split>{{ t($details[$key]['title']) }}</h2>
+                            <p class="mt-5 leading-relaxed text-stone" data-reveal>{{ t($details[$key]['text']) }}</p>
                         </div>
                         <div class="mt-10" data-reveal>
                             <div class="flex gap-4 border-t border-ink-2/10 pt-6">
                                 <x-icon name="map-pin" class="mt-0.5 size-5 text-olive" />
                                 <address class="text-sm leading-relaxed not-italic text-ink-2">
-                                    {!! implode('<br>', array_map('e', $location['lines'])) !!}
+                                    {!! implode('<br>', array_map(fn ($line) => e(__($line)), $location['lines'])) !!}
                                 </address>
                             </div>
                             <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($location['map_query']) }}" target="_blank" rel="noopener noreferrer" class="link-line mt-6 text-sm text-ink-2">
-                                View area on Google Maps
+                                {{ __('View area on Google Maps') }}
                                 <x-icon name="arrow-up-right" class="size-4" />
                             </a>
                         </div>
@@ -100,8 +100,8 @@
                 ] as [$icon, $label])
                     <div class="bg-ink p-7 sm:p-8">
                         <x-icon :name="$icon" class="size-7 text-accent" />
-                        <dt class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ $label }}</dt>
-                        <dd class="mt-4"><x-confirm>To be confirmed</x-confirm></dd>
+                        <dt class="mt-8 font-display text-xl font-semibold tracking-[-0.02em]">{{ t($label) }}</dt>
+                        <dd class="mt-4"><x-confirm>{{ __('To be confirmed') }}</x-confirm></dd>
                     </div>
                 @endforeach
             </dl>

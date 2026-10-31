@@ -50,10 +50,10 @@ class BusinessInquiryRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'contact_person' => 'contact person',
-            'inquiry_type' => 'inquiry type',
-            'product_requirements' => 'product requirements',
-            'estimated_quantity' => 'estimated quantity',
+            'contact_person' => __('contact person'),
+            'inquiry_type' => __('inquiry type'),
+            'product_requirements' => __('product requirements'),
+            'estimated_quantity' => __('estimated quantity'),
         ];
     }
 
@@ -63,8 +63,8 @@ class BusinessInquiryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone.regex' => 'Please enter a valid phone number.',
-            'consent.accepted' => 'Please confirm that we may use your details to respond to your inquiry.',
+            'phone.regex' => __('Please enter a valid phone number.'),
+            'consent.accepted' => __('Please confirm that we may use your details to respond to your inquiry.'),
         ];
     }
 }

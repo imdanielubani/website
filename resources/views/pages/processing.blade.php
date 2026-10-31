@@ -17,28 +17,28 @@
         <div class="container-site">
             <div class="grid gap-14 lg:grid-cols-12">
                 <div class="lg:col-span-5">
-                    <p class="eyebrow" data-reveal>Petroleum processing</p>
-                    <h2 class="text-h2 mt-6" data-split>A registered activity, described with care</h2>
-                    <p class="lead mt-6" data-reveal>We distinguish clearly between what the company is registered to do and operational details that have been confirmed for publication.</p>
+                    <p class="eyebrow" data-reveal>{{ __('Petroleum processing') }}</p>
+                    <h2 class="text-h2 mt-6" data-split>{{ __('A registered activity, described with care') }}</h2>
+                    <p class="lead mt-6" data-reveal>{{ __('We distinguish clearly between what the company is registered to do and operational details that have been confirmed for publication.') }}</p>
                 </div>
                 <div class="grid gap-5 lg:col-span-7" data-stagger>
                     <div class="border border-line bg-cream p-8 sm:p-10">
                         <div class="flex items-center gap-3">
                             <x-icon name="badge-check" class="size-6 text-olive" />
-                            <p class="text-sm font-semibold tracking-[0.14em] text-olive uppercase">Registered activity</p>
+                            <p class="text-sm font-semibold tracking-[0.14em] text-olive uppercase">{{ __('Registered activity') }}</p>
                         </div>
                         <p class="mt-5 text-lg leading-relaxed text-ink-2">
-                            “Processing of crude oil and its by-products”, added to the company’s object of activity on 31 January 2018, alongside wholesale import and export of hydrocarbons, fuels, oil, gas and their by-products.
+                            {{ __('“Processing of crude oil and its by-products”, added to the company’s object of activity on 31 January 2018, alongside wholesale import and export of hydrocarbons, fuels, oil, gas and their by-products.') }}
                         </p>
-                        <p class="mt-4 text-sm text-stone">Source: Albanian business register (QKB) extract.</p>
+                        <p class="mt-4 text-sm text-stone">{{ __('Source: Albanian business register (QKB) extract.') }}</p>
                     </div>
                     <div class="border border-dashed border-olive/40 p-8 sm:p-10">
                         <div class="flex items-center gap-3">
                             <x-icon name="clipboard-check" class="size-6 text-olive" />
-                            <p class="text-sm font-semibold tracking-[0.14em] text-olive uppercase">Operational capabilities</p>
+                            <p class="text-sm font-semibold tracking-[0.14em] text-olive uppercase">{{ __('Operational capabilities') }}</p>
                         </div>
                         <p class="mt-5 leading-relaxed text-stone">
-                            Information on facilities, processing units, operating status, capacity and output will be published here once confirmed by the company. Until then, please contact our technical team directly.
+                            {{ __('Information on facilities, processing units, operating status, capacity and output will be published here once confirmed by the company. Until then, please contact our technical team directly.') }}
                         </p>
                         <div class="mt-6"><x-confirm /></div>
                     </div>
@@ -69,9 +69,9 @@
     <section class="section bg-paper">
         <div class="container-site">
             <x-sections.split image="industrial-steam" ratio="aspect-[4/3] lg:aspect-[5/4]">
-                <p class="eyebrow" data-reveal>Industrial operations</p>
-                <h2 class="text-h2 mt-6" data-split>Operating principles for industrial work</h2>
-                <p class="lead mt-6" data-reveal>Any industrial activity we undertake is governed by the same principles: planning, competence, control and environmental care.</p>
+                <p class="eyebrow" data-reveal>{{ __('Industrial operations') }}</p>
+                <h2 class="text-h2 mt-6" data-split>{{ __('Operating principles for industrial work') }}</h2>
+                <p class="lead mt-6" data-reveal>{{ __('Any industrial activity we undertake is governed by the same principles: planning, competence, control and environmental care.') }}</p>
                 <ul class="mt-10 divide-y divide-line border-y border-line" data-stagger>
                     @foreach ([
                         ['shield-check', 'Process safety', 'Hazards identified and controlled before work begins.'],
@@ -82,8 +82,8 @@
                         <li class="flex gap-5 py-5">
                             <x-icon :name="$icon" class="mt-0.5 size-6 text-olive" />
                             <div>
-                                <p class="font-semibold text-ink-2">{{ $title }}</p>
-                                <p class="mt-1 text-stone">{{ $text }}</p>
+                                <p class="font-semibold text-ink-2">{{ t($title) }}</p>
+                                <p class="mt-1 text-stone">{{ t($text) }}</p>
                             </div>
                         </li>
                     @endforeach
@@ -104,8 +104,8 @@
             <dl class="mt-16 grid gap-px border border-line bg-line sm:grid-cols-2 lg:mt-20 lg:grid-cols-4" data-stagger>
                 @foreach (['Facility', 'Operating status', 'Processing capacity', 'Product slate'] as $field)
                     <div class="bg-paper p-7 sm:p-8">
-                        <dt class="text-sm font-semibold tracking-[0.14em] text-stone uppercase">{{ $field }}</dt>
-                        <dd class="mt-6"><x-confirm>To be confirmed</x-confirm></dd>
+                        <dt class="text-sm font-semibold tracking-[0.14em] text-stone uppercase">{{ t($field) }}</dt>
+                        <dd class="mt-6"><x-confirm>{{ __('To be confirmed') }}</x-confirm></dd>
                     </div>
                 @endforeach
             </dl>

@@ -16,7 +16,7 @@
     sizes="{{ $sizes }}"
     width="{{ $image['w'] }}"
     height="{{ $image['h'] }}"
-    alt="{{ $alt ?? $image['alt'] }}"
+    alt="{{ $alt ?? __($image['alt']) }}"
     decoding="async"
     @if ($eager) fetchpriority="high" @else loading="lazy" @endif
     {{ $attributes->class(['size-full object-cover']) }}

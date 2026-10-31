@@ -14,15 +14,18 @@ use Illuminate\Support\Collection;
  */
 class NewsRepository
 {
-    private ?Collection $articles = null;
+    /** @var array<string, Collection<int, NewsArticle>> keyed by language */
+    private array $articles = [];
 
     public function __construct(private readonly string $path) {}
 
-    /** @return Collection<int, NewsArticle> */
+    /** @return Collection<int, NewsArticle> in the current language */
     public function all(): Collection
     {
-        return $this->articles ??= collect(require $this->path)
-            ->map(fn (array $data) => NewsArticle::fromArray($data))
+        $locale = app()->getLocale();
+
+        return $this->articles[$locale] ??= collect(require $this->path)
+            ->map(fn (array $data) => NewsArticle::fromArray($data, $locale))
             ->sortByDesc(fn (NewsArticle $a) => $a->publishedAt?->timestamp ?? 0)
             ->values();
     }

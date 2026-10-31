@@ -1,7 +1,7 @@
 @php
     $crumbs = [
-        ['name' => 'News', 'url' => route('news.index')],
-        ['name' => $article->category, 'url' => route('news.category', $article->categorySlug())],
+        ['name' => 'News', 'url' => lroute('news.index')],
+        ['name' => $article->category, 'url' => lroute('news.category', $article->categorySlug())],
         ['name' => $article->title],
     ];
 
@@ -28,18 +28,18 @@
     <article>
         <header data-hero class="on-dark relative isolate overflow-hidden bg-ink pt-40 pb-16 text-white sm:pb-20">
             <div class="container-site">
-                <nav aria-label="Breadcrumb" data-hero-item>
+                <nav aria-label="{{ __('Breadcrumb') }}" data-hero-item>
                     <ol class="flex flex-wrap items-center gap-2 text-sm text-white/60">
-                        <li><a href="{{ route('home') }}" class="hover:text-white">Home</a></li>
+                        <li><a href="{{ lroute('home') }}" class="hover:text-white">{{ __('Home') }}</a></li>
                         <li aria-hidden="true">/</li>
-                        <li><a href="{{ route('news.index') }}" class="hover:text-white">News</a></li>
+                        <li><a href="{{ lroute('news.index') }}" class="hover:text-white">{{ __('News') }}</a></li>
                         <li aria-hidden="true">/</li>
-                        <li><a href="{{ route('news.category', $article->categorySlug()) }}" class="hover:text-white">{{ $article->category }}</a></li>
+                        <li><a href="{{ lroute('news.category', $article->categorySlug()) }}" class="hover:text-white">{{ t($article->category) }}</a></li>
                     </ol>
                 </nav>
                 <h1 data-hero-title class="text-h1 mt-10 max-w-5xl">{{ $article->title }}</h1>
                 <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/12 pt-6 text-sm text-white/65" data-hero-item>
-                    <span class="flex items-center gap-2"><x-icon name="calendar-days" class="size-4 text-accent" /><time datetime="{{ $article->publishedAt->toDateString() }}">{{ $article->publishedAt->format('j F Y') }}</time></span>
+                    <span class="flex items-center gap-2"><x-icon name="calendar-days" class="size-4 text-accent" /><time datetime="{{ $article->publishedAt->toDateString() }}">{{ $article->publishedAt->translatedFormat('j F Y') }}</time></span>
                     <span class="flex items-center gap-2"><x-icon name="clock" class="size-4 text-accent" />{{ $article->readingMinutes() }} min read</span>
                     <span>By {{ $article->author }}</span>
                 </div>
@@ -61,16 +61,16 @@
                 <div class="grid gap-12 lg:grid-cols-12">
                     <aside class="order-2 lg:order-1 lg:col-span-3">
                         <div class="lg:sticky lg:top-32">
-                            <p class="text-sm text-stone">Category</p>
-                            <a href="{{ route('news.category', $article->categorySlug()) }}" class="mt-1 inline-block font-semibold text-ink-2 hover:text-olive">{{ $article->category }}</a>
+                            <p class="text-sm text-stone">{{ __('Category') }}</p>
+                            <a href="{{ lroute('news.category', $article->categorySlug()) }}" class="mt-1 inline-block font-semibold text-ink-2 hover:text-olive">{{ t($article->category) }}</a>
                             <div class="mt-8 border-t border-line pt-8">
-                                <a href="{{ route('news.index') }}" class="link-line text-sm text-ink-2">← All news</a>
+                                <a href="{{ lroute('news.index') }}" class="link-line text-sm text-ink-2">{{ __('← All news') }}</a>
                             </div>
                         </div>
                     </aside>
                     <div class="order-1 max-w-3xl lg:order-2 lg:col-span-8 lg:col-start-5">
                         @if ($article->isSample)
-                            <div class="mb-10"><x-confirm>Sample article for layout purposes. Replace before launch</x-confirm></div>
+                            <div class="mb-10"><x-confirm>{{ __('Sample article for layout purposes. Replace before launch') }}</x-confirm></div>
                         @endif
                         <p class="text-xl leading-relaxed text-ink-2">{{ $article->excerpt }}</p>
                         <div class="prose-site mt-10">
@@ -88,7 +88,7 @@
                 <div class="flex flex-wrap items-end justify-between gap-8">
                     <x-sections.heading eyebrow="Keep reading" title="Related articles" />
                     <div data-reveal>
-                        <x-buttons.primary :href="route('news.index')" variant="outline">All News</x-buttons.primary>
+                        <x-buttons.primary :href="lroute('news.index')" variant="outline">{{ __('All News') }}</x-buttons.primary>
                     </div>
                 </div>
                 <div class="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-3" data-stagger>

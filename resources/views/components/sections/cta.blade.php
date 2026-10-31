@@ -7,6 +7,12 @@
     'secondary' => ['label' => 'Business Inquiry', 'route' => 'inquiry'],
 ])
 
+@php
+    $eyebrow = t($eyebrow);
+    $title = t($title);
+    $text = $text ? t($text) : null;
+@endphp
+
 <section class="on-dark relative isolate overflow-hidden bg-ink text-white">
     <div class="absolute inset-0 -z-10 overflow-hidden">
         <div data-parallax="14" class="size-full">
@@ -24,10 +30,10 @@
             @endif
             <div class="mt-10 flex flex-wrap gap-3" data-reveal data-delay="0.15">
                 @if ($primary)
-                    <x-buttons.primary :href="route($primary['route'])">{{ $primary['label'] }}</x-buttons.primary>
+                    <x-buttons.primary :href="lroute($primary['route'])">{{ t($primary['label']) }}</x-buttons.primary>
                 @endif
                 @if ($secondary)
-                    <x-buttons.primary :href="route($secondary['route'])" variant="ghost">{{ $secondary['label'] }}</x-buttons.primary>
+                    <x-buttons.primary :href="lroute($secondary['route'])" variant="ghost">{{ t($secondary['label']) }}</x-buttons.primary>
                 @endif
             </div>
         </div>

@@ -32,11 +32,12 @@ class ContactController extends Controller
             'Phone' => $data['phone'] ?? null,
             'Country' => $data['country'],
             'Message' => $data['message'],
+            'Language' => config('site.locales.' . app()->getLocale() . '.name'),
             'Submitted' => now()->toDayDateTimeString(),
         ]);
 
         return redirect()
-            ->to(route('contact') . '#contact-form')
+            ->to(lroute('contact') . '#contact-form')
             ->with('status', 'Thank you. Your message has been received and our team will be in touch.');
     }
 }

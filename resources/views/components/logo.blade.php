@@ -11,7 +11,7 @@
 @endphp
 
 <{{ $tag }}
-    @if ($href) href="{{ $href }}" aria-label="{{ config('company.name') }} home" @endif
+    @if ($href) href="{{ $href }}" aria-label="{{ __(':company home', ['company' => config('company.name')]) }}" @endif
     {{ $attributes->class(['inline-flex items-center gap-3', $tone === 'dark' ? 'text-white' : 'text-ink-2']) }}
 >
     <svg viewBox="0 0 40 40" class="size-10 shrink-0" aria-hidden="true" focusable="false">

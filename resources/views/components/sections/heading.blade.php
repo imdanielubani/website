@@ -6,6 +6,12 @@
     'align' => 'left', // left | split
 ])
 
+@php
+    $eyebrow = $eyebrow ? t($eyebrow) : null;
+    $title = t($title);
+    $lead = $lead ? t($lead) : null;
+@endphp
+
 @if ($align === 'split')
     <div {{ $attributes->class(['grid gap-8 lg:grid-cols-12 lg:gap-10']) }}>
         <div class="lg:col-span-7">

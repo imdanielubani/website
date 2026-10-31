@@ -10,6 +10,8 @@
 ])
 
 @php
+    $label = t($label);
+    $hint = $hint ? t($hint) : null;
     $id = 'f-' . $name;
     $hasError = $errors->has($name);
     $describedBy = trim(($hint ? "{$id}-hint " : '') . ($hasError ? "{$id}-error" : ''));
@@ -21,7 +23,7 @@
         @if ($required)
             <span class="text-olive" aria-hidden="true">*</span>
         @else
-            <span class="font-normal text-stone">(optional)</span>
+            <span class="font-normal text-stone">({{ __('optional') }})</span>
         @endif
     </label>
 

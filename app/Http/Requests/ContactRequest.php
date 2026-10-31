@@ -48,8 +48,8 @@ class ContactRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'full_name' => 'full name',
-            'inquiry_type' => 'inquiry type',
+            'full_name' => __('full name'),
+            'inquiry_type' => __('inquiry type'),
         ];
     }
 
@@ -59,8 +59,8 @@ class ContactRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone.regex' => 'Please enter a valid phone number.',
-            'consent.accepted' => 'Please confirm that we may use your details to respond to your inquiry.',
+            'phone.regex' => __('Please enter a valid phone number.'),
+            'consent.accepted' => __('Please confirm that we may use your details to respond to your inquiry.'),
         ];
     }
 }
