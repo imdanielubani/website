@@ -2,7 +2,7 @@
     'eyebrow' => 'Work with us',
     'title',
     'text' => null,
-    'image' => 'tanker-sunset',
+    'image' => 'refinery-dusk',
     'primary' => ['label' => 'Contact Our Team', 'route' => 'contact'],
     'secondary' => ['label' => 'Business Inquiry', 'route' => 'inquiry'],
 ])
