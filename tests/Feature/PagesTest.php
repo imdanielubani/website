@@ -97,7 +97,7 @@ class PagesTest extends TestCase
     public function test_every_configured_image_exists(): void
     {
         foreach (config('images') as $key => $image) {
-            foreach (['lg', 'sm'] as $size) {
+            foreach (['lg', 'sm', 'xs'] as $size) {
                 $this->assertFileExists(public_path("images/photos/{$image['file']}-{$size}.webp"), "Missing {$size} image for {$key}");
             }
 

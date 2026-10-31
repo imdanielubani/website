@@ -12,7 +12,7 @@
 
 <img
     src="{{ $base }}-lg.webp"
-    srcset="{{ $base }}-sm.webp 960w, {{ $base }}-lg.webp {{ $image['w'] }}w"
+    srcset="{{ $base }}-xs.webp 640w, {{ $base }}-sm.webp 960w, {{ $base }}-lg.webp {{ $image['w'] }}w"
     sizes="{{ $sizes }}"
     width="{{ $image['w'] }}"
     height="{{ $image['h'] }}"

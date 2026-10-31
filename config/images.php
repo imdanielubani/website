@@ -6,9 +6,10 @@
 |--------------------------------------------------------------------------
 |
 | Every photograph used on the site is registered here by key. Each key
-| maps to two optimised WebP files in public/images/photos:
+| maps to three optimised WebP files in public/images/photos:
 |
-|   {file}-lg.webp  (~1920-2000px wide)  and  {file}-sm.webp  (960px wide)
+|   {file}-lg.webp (~1920-2000px wide), {file}-sm.webp (960px wide) and
+|   {file}-xs.webp (640px wide, for phones)
 |
 | To replace an image, drop new files with the same names into that folder
 | (or point "file" at a new name) and update the alt text. Width and height
