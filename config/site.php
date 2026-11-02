@@ -29,6 +29,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Confirmation email to visitors
+    |--------------------------------------------------------------------------
+    |
+    | When true, visitors receive a branded confirmation email in their
+    | language after submitting a form.
+    |
+    */
+
+    'send_acknowledgement' => (bool) env('INQUIRY_SEND_ACKNOWLEDGEMENT', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Languages
     |--------------------------------------------------------------------------
     |

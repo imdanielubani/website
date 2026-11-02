@@ -34,7 +34,7 @@ class ContactController extends Controller
             'Message' => $data['message'],
             'Language' => config('site.locales.' . app()->getLocale() . '.name'),
             'Submitted' => now()->toDayDateTimeString(),
-        ]);
+        ], ContactRequest::INQUIRY_TYPES[$data['inquiry_type']]);
 
         return redirect()
             ->to(lroute('contact') . '#contact-form')
