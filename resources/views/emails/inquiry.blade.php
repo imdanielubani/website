@@ -1,37 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>{{ $form }}</title>
-</head>
-<body style="margin:0;background:#f6f6f6;font-family:Arial,Helvetica,sans-serif;color:#1b1b19;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f6f6;padding:32px 12px;">
+{{-- Internal notification to the company inbox for each form submission. --}}
+@extends('emails.layouts.branded')
+
+@section('title', $form)
+@section('preheader', $form . ' from ' . $replyName)
+
+@section('content')
+    <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#545814;font-weight:bold;">Website submission</p>
+    <h1 style="margin:0 0 24px;font-size:24px;line-height:1.25;color:#1b1b19;">{{ $form }}</h1>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        @foreach ($fields as $label => $value)
+            <tr>
+                <td valign="top" style="padding:11px 12px 11px 0;border-top:1px solid #e4e4dc;width:36%;font-size:13px;color:#565659;">{{ $label }}</td>
+                <td valign="top" style="padding:11px 0;border-top:1px solid #e4e4dc;font-size:14px;color:#1b1b19;white-space:pre-line;">{{ filled($value) ? $value : '-' }}</td>
+            </tr>
+        @endforeach
+    </table>
+
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;">
         <tr>
-            <td align="center">
-                <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;">
-                    <tr>
-                        <td style="background:#1b1b19;padding:24px 32px;color:#ffffff;font-size:18px;font-weight:bold;letter-spacing:-0.3px;">
-                            AL.GLOBAL <span style="color:#e2e890;">OIL</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:32px;">
-                            <p style="margin:0 0 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#565659;">Website submission</p>
-                            <h1 style="margin:0 0 24px;font-size:22px;">{{ $form }}</h1>
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                                @foreach ($fields as $label => $value)
-                                    <tr>
-                                        <td style="padding:10px 0;border-top:1px solid #e4e4dc;width:38%;vertical-align:top;font-size:13px;color:#565659;">{{ $label }}</td>
-                                        <td style="padding:10px 0;border-top:1px solid #e4e4dc;vertical-align:top;font-size:14px;white-space:pre-line;">{{ filled($value) ? $value : '-' }}</td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                            <p style="margin:24px 0 0;font-size:12px;color:#565659;">Reply directly to this email to respond to {{ $replyName }}.</p>
-                        </td>
-                    </tr>
-                </table>
+            <td style="background:#1b1b19;">
+                <a href="mailto:{{ $replyEmail }}" style="display:inline-block;padding:12px 22px;font-size:14px;font-weight:bold;color:#e2e890;text-decoration:none;">Reply to {{ $replyName }}</a>
             </td>
         </tr>
     </table>
-</body>
-</html>
+@endsection
+
+@section('footnote')
+    Sent from the contact forms on the {{ config('company.name') }} website. Replying to this email answers the sender directly.
+@endsection

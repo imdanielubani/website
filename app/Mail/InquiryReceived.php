@@ -36,6 +36,6 @@ class InquiryReceived extends Mailable
 
     public function content(): Content
     {
-        return new Content(view: 'emails.inquiry');
+        return new Content(view: 'emails.inquiry', text: 'emails.inquiry-text');
     }
 }
