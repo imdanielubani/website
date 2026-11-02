@@ -88,6 +88,8 @@ Feature tests cover every page (status, SEO metadata, single `<h1>`), noindex he
 
 ## Deployment
 
+**Hostbeak / cPanel:** follow the step-by-step checklist in [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ```bash
 composer install --no-dev --optimize-autoloader
 npm ci && npm run build
@@ -219,6 +221,9 @@ Every submission is:
 2. Rate limited to 3 per minute and 15 per hour per IP address.
 3. Written to `storage/logs/inquiries-YYYY-MM-DD.log` (kept 90 days) as a backup record.
 4. Emailed to `INQUIRY_RECIPIENT` with the reply-to address set to the sender.
+5. Confirmed to the visitor with a branded email in their language (`INQUIRY_SEND_ACKNOWLEDGEMENT`). The confirmation never repeats the visitor's message, so the forms cannot be used to send arbitrary text to other people.
+
+All emails use the branded layout in `resources/views/emails/layouts/branded.blade.php`, with the logo (`public/images/brand/email-logo.png`) embedded in the message and a plain-text version. To check email delivery on a server, run `php artisan inquiries:test-mail you@example.com` (add `--locale=sq` for the Albanian confirmation).
 
 Inquiry types can be preselected by URL, e.g. `/contact?type=careers` or `/business-inquiry?type=supply`.
 
