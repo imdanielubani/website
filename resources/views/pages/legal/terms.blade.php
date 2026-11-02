@@ -2,7 +2,7 @@
     title="Terms & Conditions"
     description="Terms and conditions governing the use of the AL.GLOBAL OIL SH.A website."
     lead="The terms that apply when you access and use this website."
-    updated="2026-10-31"
+    updated="2025-03-05"
     :toc="[
         'about' => 'About these terms',
         'information' => 'Website information',

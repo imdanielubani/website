@@ -2,7 +2,7 @@
     title="Privacy Policy"
     description="How AL.GLOBAL OIL SH.A collects, uses and protects personal data submitted through this website."
     lead="How we collect, use and protect personal information when you use this website or contact us."
-    updated="2026-10-31"
+    updated="2025-03-05"
     :toc="[
         'controller' => 'Who we are',
         'data' => 'Information we collect',
