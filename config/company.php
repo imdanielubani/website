@@ -40,8 +40,9 @@ return [
     'contact' => [
         // Verified: phone numbers listed on the public register
         'phones' => ['+355 68 204 4754', '+355 69 204 4754'],
-        // Official company email
-        'email' => env('COMPANY_EMAIL', 'info@alglobaloilsha.com'),
+        // Public contact email shown on the website. Not published for now:
+        // leave COMPANY_EMAIL empty. Form submissions still go to INQUIRY_RECIPIENT.
+        'email' => env('COMPANY_EMAIL') ?: null,
         'hours' => null,
     ],
 

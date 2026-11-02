@@ -39,7 +39,7 @@ class EmailTest extends TestCase
         Mail::assertSent(InquiryReceived::class, 1);
         Mail::assertSent(InquiryAcknowledgement::class, function (InquiryAcknowledgement $mail) {
             return $mail->hasTo('arta@example.com')
-                && $mail->hasReplyTo(config('company.contact.email'))
+                && $mail->replyTo === [] // No public email: replies go to the sending mailbox.
                 && $mail->locale === 'en'
                 && $mail->inquiryType === 'Customer inquiry';
         });

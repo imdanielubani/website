@@ -105,8 +105,4 @@ class SecurityTest extends TestCase
         $this->assertStringContainsString('Options -Indexes', file_get_contents(public_path('.htaccess')));
     }
 
-    public function test_security_contact_is_published(): void
-    {
-        $this->assertStringContainsString('Contact: mailto:info@alglobaloilsha.com', file_get_contents(public_path('.well-known/security.txt')));
-    }
 }

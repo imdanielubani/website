@@ -66,7 +66,7 @@ On XAMPP/Apache, point the virtual host's document root at the `public/` directo
 | `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_SCHEME` | Outgoing mail for form notifications. With `MAIL_MAILER=log`, emails are written to `storage/logs/laravel.log`. |
 | `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` | Sender of form notification emails. |
 | `INQUIRY_RECIPIENT` | Inbox that receives contact and business inquiries. Default `info@alglobaloilsha.com`. |
-| `COMPANY_EMAIL` | Public email shown on the site, in structured data and on the letterhead. Default `info@alglobaloilsha.com`. |
+| `COMPANY_EMAIL` | Public email shown on the website and in structured data. Empty by default, so no email address is published; form submissions still reach `INQUIRY_RECIPIENT`. |
 | `SITE_NOINDEX` | `true` (default) keeps search engines out. |
 
 Never commit `.env`; it contains secrets.
@@ -263,8 +263,6 @@ The site is hardened against common web attacks. Every protection is covered by 
 | Session theft | HttpOnly, SameSite cookies; encrypted session data; secure-only cookies and HSTS over HTTPS. |
 | MIME sniffing, referrer leaks, browser features | `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` and `Cross-Origin-Resource-Policy`. |
 | Vulnerable dependencies | Check regularly with `composer audit` and `npm audit`. |
-
-A security contact is published at `/.well-known/security.txt` (renew its `Expires` date yearly).
 
 ### Production security checklist
 

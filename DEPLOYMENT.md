@@ -80,7 +80,7 @@ Throughout this guide:
 
 **Without Terminal:**
 
-- [ ] Copy **everything inside** `alglobal/public/` (including `.htaccess`, `build/`, `images/` and `.well-known/`) into `public_html/`.
+- [ ] Copy **everything inside** `alglobal/public/` (including `.htaccess`, `build/` and `images/`) into `public_html/`.
 - [ ] Edit `public_html/index.php` and change the three paths, then tell Laravel where its public folder is:
 
   ```php
@@ -120,7 +120,8 @@ Throughout this guide:
 
   INQUIRY_RECIPIENT="info@alglobaloilsha.com"
   INQUIRY_SEND_ACKNOWLEDGEMENT=true
-  COMPANY_EMAIL="info@alglobaloilsha.com"
+  # Leave empty: no email address is shown on the website.
+  COMPANY_EMAIL=
   SITE_NOINDEX=true
   SESSION_SECURE_COOKIE=true
   ```

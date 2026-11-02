@@ -12,4 +12,6 @@
 {{ __('Kind regards,') }}
 {{ config('company.name') }}
 {{ implode(', ', array_map(fn ($line) => __($line), config('company.locations.tirana.lines'))) }}
+@if (config('company.contact.email'))
 {{ config('company.contact.email') }}
+@endif

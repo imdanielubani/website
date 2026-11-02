@@ -37,7 +37,7 @@
     <main>
         <p class="code" aria-hidden="true">500</p>
         <h1>Something went wrong on our side</h1>
-        <p class="lead">We are sorry for the inconvenience. Please try again in a few moments. If the problem continues, you can reach us {{-- by telephone on +355 68 204 4754 or --}} by email at <a href="mailto:info@alglobaloilsha.com" style="color:#e2e890">info@alglobaloilsha.com</a>.</p>
+        <p class="lead">We are sorry for the inconvenience. Please try again in a few moments. If the problem continues, please reach us through the <a href="/contact" style="color:#e2e890">contact form</a>.</p>
         <div class="actions">
             <a class="btn primary" href="/">Back to Home</a>
             {{-- Phone numbers hidden for now. Remove this comment to show them again.
@@ -46,7 +46,7 @@
         </div>
         <div class="sq" lang="sq">
             <h2>Diçka shkoi keq nga ana jonë</h2>
-            <p class="lead">Na vjen keq për shqetësimin. Ju lutemi provoni përsëri pas pak çastesh. Nëse problemi vazhdon, mund të na kontaktoni {{-- në telefon +355 68 204 4754 ose --}} me email në <a href="mailto:info@alglobaloilsha.com" style="color:#e2e890">info@alglobaloilsha.com</a>.</p>
+            <p class="lead">Na vjen keq për shqetësimin. Ju lutemi provoni përsëri pas pak çastesh. Nëse problemi vazhdon, ju lutemi na kontaktoni nëpërmjet <a href="/sq/contact" style="color:#e2e890">formularit të kontaktit</a>.</p>
             <div class="actions">
                 <a class="btn primary" href="/sq">Kthehu në faqen kryesore</a>
             </div>

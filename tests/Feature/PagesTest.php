@@ -72,19 +72,28 @@ class PagesTest extends TestCase
         $this->assertStringNotContainsStringIgnoringCase('sitemap', preg_replace('/^#.*$/m', '', $robots));
     }
 
-    public function test_company_email_is_published(): void
+    public function test_company_email_is_not_published(): void
     {
-        $email = config('company.contact.email');
+        $this->assertNull(config('company.contact.email'));
 
-        $this->assertSame('info@alglobaloilsha.com', $email);
+        $pages = ['/', '/about', '/careers', '/contact', '/business-inquiry', '/privacy-policy', '/this-page-does-not-exist',
+            '/sq', '/sq/careers', '/sq/contact', '/sq/business-inquiry', '/sq/privacy-policy'];
 
-        $this->get('/contact')
-            ->assertSee("mailto:{$email}", false)
-            ->assertSee('"email":"' . $email . '"', false)
-            ->assertDontSee('Official email to be confirmed');
+        foreach ($pages as $uri) {
+            $this->get($uri)
+                ->assertDontSee('alglobaloilsha.com')
+                ->assertDontSee('mailto:', false)
+                ->assertDontSee('"email":', false)
+                ->assertDontSee('Official email to be confirmed');
+        }
 
-        $this->get('/business-inquiry')->assertSee("mailto:{$email}", false);
-        $this->get('/')->assertSee("mailto:{$email}", false);
+        foreach (['errors.429', 'errors.500'] as $view) {
+            $html = view($view)->render();
+            $this->assertStringNotContainsString('alglobaloilsha.com', $html);
+            $this->assertStringNotContainsString('mailto:', $html);
+        }
+
+        $this->assertFileDoesNotExist(public_path('.well-known/security.txt'));
     }
 
     public function test_unknown_page_uses_custom_404(): void

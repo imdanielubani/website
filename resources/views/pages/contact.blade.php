@@ -5,14 +5,14 @@
 
 <x-layouts.app
     title="Contact Us"
-    description="Contact AL.GLOBAL OIL SH.A in Tirana, Albania. Email, registered address and inquiry form for customers, suppliers, careers and general questions."
+    description="Contact AL.GLOBAL OIL SH.A in Tirana, Albania. Registered address and inquiry form for customers, suppliers, careers and general questions."
     image="office-sky"
     :breadcrumbs="[['name' => 'Contact']]"
 >
     <x-sections.page-hero
         eyebrow="Contact Us"
         title="Let’s talk energy"
-        lead="Reach our team in Tirana by email or send us a message. Choose the inquiry type that fits and we will direct it to the right people."
+        lead="Send our team in Tirana a message using the form below. Choose the inquiry type that fits and we will direct it to the right people."
         image="office-sky"
         size="md"
         :breadcrumbs="[['name' => 'Contact']]"
@@ -52,20 +52,17 @@
                                 </div>
                             </div>
                             --}}
-                            <div class="flex gap-4 py-6">
-                                <x-icon name="mail" class="mt-0.5 size-5 text-olive" />
-                                <div>
-                                    <dt class="text-sm font-semibold text-ink-2">{{ __('Email') }}</dt>
-                                    <dd class="mt-2">
-                                        @if ($email)
+                            @if ($email)
+                                <div class="flex gap-4 py-6">
+                                    <x-icon name="mail" class="mt-0.5 size-5 text-olive" />
+                                    <div>
+                                        <dt class="text-sm font-semibold text-ink-2">{{ __('Email') }}</dt>
+                                        <dd class="mt-2">
                                             <a href="mailto:{{ $email }}" class="link-line font-normal text-ink-2">{{ $email }}</a>
-                                        @else
-                                            <span class="text-stone">{{ __('Use the form on this page.') }}</span>
-                                            <div class="mt-3"><x-confirm>{{ __('Official email to be confirmed') }}</x-confirm></div>
-                                        @endif
-                                    </dd>
+                                        </dd>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </dl>
 
                         <div class="mt-10 bg-cream p-7" data-reveal>
